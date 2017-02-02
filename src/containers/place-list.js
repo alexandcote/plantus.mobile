@@ -1,7 +1,9 @@
-import React from 'react';
-import { View, StyleSheet, ListView } from 'react-native';
+// @flow
 
-const PlaceList = ({ style }) => (
+import React from 'react';
+import { View, StyleSheet, ListView, ViewStyle } from 'react-native';
+
+const PlaceList = (props: { style: ViewStyle }) => (
   <View />
 );
 
