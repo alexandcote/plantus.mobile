@@ -1,4 +1,4 @@
-package com.plantus_mobile;
+package com.plantus;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "plantus_mobile";
+        return "plantus";
     }
 }

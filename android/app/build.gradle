@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.plantus_mobile"
+        applicationId "com.plantus"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1

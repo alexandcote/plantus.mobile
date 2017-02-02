@@ -1,4 +1,4 @@
-package com.plantus_mobile;
+package com.plantus;
 
 import android.app.Application;
 import android.util.Log;

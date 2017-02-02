@@ -16,11 +16,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
 
-@interface plantus_mobileTests : XCTestCase
+@interface plantusTests : XCTestCase
 
 @end
 
-@implementation plantus_mobileTests
+@implementation plantusTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
