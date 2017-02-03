@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   item: {
     margin: 10,
     width: 140,
-    flexGrow: 1,
     height: 140,
   },
 });
