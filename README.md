@@ -29,12 +29,14 @@ Comment se setupper
   2. vsmobile.vscode-react-native
   3. flowtype.flow-for-vscode
 2. Modifier les settings du workspace pour avoir au moins les propriétés suivante :
-  ```json
-{
-    "flow.useNPMPackagedFlow": true,
-    "javascript.validate.enable": false
-}
-  ```
+
+    ```json
+    {
+        "flow.useNPMPackagedFlow": true,
+        "javascript.validate.enable": false
+    }
+    ```
+    
 3. Reloader VSCode
 
 #### Déboguer dans VSCode
