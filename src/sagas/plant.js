@@ -1,6 +1,6 @@
 // @flow
 
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, call, take } from 'redux-saga/effects';
 
 import { getAllPlants } from '../services/api';
 import { plantActions } from '../redux/actions';
@@ -15,5 +15,8 @@ function* fetchPlants() {
 }
 
 export function* watchLoadPlants(): any {
-  yield takeEvery(plantActions.LOAD_PLANTS_REQUEST, fetchPlants);
+  while (true) {
+    yield take(plantActions.LOAD_PLANTS_REQUEST);
+    yield call(fetchPlants);
+  }
 }

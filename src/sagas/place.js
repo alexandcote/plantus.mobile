@@ -1,5 +1,5 @@
 
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, take } from 'redux-saga/effects';
 
 import { getAllPlaces } from '../services/api';
 import { placeActions } from '../redux/actions';
@@ -14,5 +14,8 @@ function* fetchPlaces() {
 }
 
 export function* watchLoadPlaces() {
-  yield takeLatest(placeActions.LOAD_PLACES_REQUEST, fetchPlaces);
+  while (true) {
+    yield take(placeActions.LOAD_PLACES_REQUEST);
+    yield call(fetchPlaces);
+  }
 }
