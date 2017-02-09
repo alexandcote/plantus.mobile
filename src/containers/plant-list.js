@@ -1,13 +1,19 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import PlantCard from '../components/plant-card';
-import PlantsMock from './plants-mock';
+import { type Plant } from '../types';
+import { plantActions } from '../redux/actions';
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+const { loadPlants } = plantActions;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   list: {
     justifyContent: 'center',
     flexDirection: 'row',
@@ -15,22 +21,69 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    width: 140,
-    height: 140,
+    width: 160,
+    height: 160,
+    flexGrow: 1,
   },
 });
 
-const Row = plantInfo => (
-  <PlantCard style={styles.item} onClick={() => console.log(`clicked on ${plantInfo.name}`)} plantInfo={plantInfo} />
-);
+type PropTypes = {
+  style?: ViewStyle,
+  loadPlants: Function,
+  plants: Array<Plant>
+}
 
-const PlantList = (props: {style?: ViewStyle}) => (
-  <View style={[{ flex: 1, backgroundColor: '#0b8' }, props.style]}>
-    <ListView
-      contentContainerStyle={styles.list}
-      dataSource={ds.cloneWithRows(PlantsMock)}
-      renderRow={Row} />
-  </View>
-);
+function renderRow(plant: Plant) {
+  return (
+    <PlantCard
+        key={plant.id}
+        style={styles.item}
+        onClick={() => console.log(`clicked on ${plant.name}`)}
+        plant={plant} />
+  );
+}
 
-export default PlantList;
+function rowHasChanged(r1, r2) { return r1 !== r2; }
+
+class PlantList extends Component {
+  state = {
+    dataSource: ListView.DataSource,
+  };
+  props: PropTypes;
+
+  constructor(props: PropTypes) {
+    super(props);
+    const ds = new ListView.DataSource({ rowHasChanged });
+    this.state = {
+      dataSource: ds,
+    };
+    props.loadPlants();
+  }
+
+  componentWillReceiveProps(nextProps: PropTypes) {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.plants),
+    });
+  }
+
+  render() {
+    return (
+      <View style={[styles.container, this.props.style]}>
+        <ListView
+            contentContainerStyle={styles.list}
+            dataSource={this.state.dataSource}
+            renderRow={renderRow} />
+      </View>
+    );
+  }
+}
+
+function mapStateToProps(state: { plants: Array<Plant> }) {
+  return {
+    plants: state.plants,
+  };
+}
+
+export default connect(mapStateToProps, {
+  loadPlants,
+})(PlantList);

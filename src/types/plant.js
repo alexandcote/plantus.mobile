@@ -1,4 +1,6 @@
-export default class PlantInfo {
+// @flow
+
+export default class Plant {
   name: string;
   temperature: number;
   humidity: number;

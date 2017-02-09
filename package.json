@@ -9,12 +9,15 @@
   },
   "dependencies": {
     "eslint-plugin-jsx-a11y": "^3.0.2",
+    "humps": "^2.0.0",
     "react": "^15.4.2",
-    "react-native": "0.40.0",
+    "react-native": "0.41.2",
     "react-native-router-flux": "^3.37.0",
+    "react-native-scrollable-tab-view": "^0.7.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-actions": "^1.2.0"
+    "redux-saga": "^0.14.3",
+    "rxjs": "^5.0.0-beta.10"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -25,9 +28,10 @@
     "eslint-plugin-flowtype": "^2.30.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.9.0",
-    "flow-bin": "0.36.0",
+    "flow-bin": "0.37.0",
     "jest": "18.1.0",
-    "react-test-renderer": "~15.4.0-rc.4"
+    "react-test-renderer": "~15.4.0-rc.4",
+    "redux-devtools-extension": "^2.13.0"
   },
   "jest": {
     "preset": "react-native"

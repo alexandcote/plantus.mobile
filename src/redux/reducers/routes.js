@@ -1,12 +1,9 @@
 // @flow
 
 import { ActionConst } from 'react-native-router-flux';
+import { Action } from '../../types';
 
-const initialState = {
-  scene: {},
-};
-
-export default function reducer(state: Object = initialState, action: Object = {}) {
+export default function reducer(state: Object = {}, action: Action) {
   switch (action.type) {
     // focus action is dispatched when a new screen comes into focus
     case ActionConst.FOCUS:
