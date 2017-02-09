@@ -4,7 +4,7 @@ import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import { Navigator, ViewStyle } from 'react-native';
 import { connect, Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 

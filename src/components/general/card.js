@@ -10,10 +10,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const Card = (props: { onClick: Function, style?: ViewStyle, children?: any }) => (
-  <TouchableNativeFeedback onPress={props.onClick}>
-    <View style={[styles.card, props.style]}>
-      {props.children}
+type PropTypes = {
+  onClick: () => void,
+  style?: ViewStyle,
+  children?: any
+}
+
+const Card = ({ onClick, style, children }: PropTypes) => (
+  <TouchableNativeFeedback onPress={onClick}>
+    <View style={[styles.card, style]}>
+      {children}
     </View>
   </TouchableNativeFeedback>
 );
