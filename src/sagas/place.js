@@ -1,3 +1,4 @@
+// @flow
 
 import { put, call, take } from 'redux-saga/effects';
 
@@ -13,7 +14,7 @@ function* fetchPlaces() {
   }
 }
 
-export function* watchLoadPlaces() {
+export function* watchLoadPlaces(): any {
   while (true) {
     yield take(placeActions.LOAD_PLACES_REQUEST);
     yield call(fetchPlaces);

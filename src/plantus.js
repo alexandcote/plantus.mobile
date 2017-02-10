@@ -10,9 +10,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducers from './redux/reducers';
 import MainTabView from './containers/main-tab-view';
+import Login from './containers/login';
 import colors from './styles/colors';
 
 import sagas from './sagas';
+
+import { getToken } from './services/jwt';
 
 const RouterWithRedux = connect()(Router);
 
@@ -42,11 +45,14 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
   return style;
 };
 
+const token = getToken();
+
 const Plantus = () => (
   <Provider store={store}>
     <RouterWithRedux getSceneStyle={getSceneStyle} navigationBarStyle={{ backgroundColor: colors.colorPrimary }}>
-      <Scene key="blob">
-        <Scene key="mainTabView" component={MainTabView} title="PlantUS" initial />
+      <Scene key="root">
+        <Scene key="login" component={Login} title="PlantUS" initial />
+        <Scene key="mainTabView" component={MainTabView} title="PlantUS" />
       </Scene>
     </RouterWithRedux>
   </Provider>

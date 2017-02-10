@@ -6,9 +6,9 @@ import { Place, Plant } from '../types';
 import placesMock from '../containers/places-mock';
 import plantsMock from '../containers/plants-mock';
 
-const API_ROOT = 'https://plantus.xyz/';
+const API_ROOT = 'https://api.plantus.xyz/';
 
-async function callApiGet(endpoint: string): any {
+async function callApiGet(endpoint: string, authorized = true): any {
   let fullUrl: string = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   if (!fullUrl.endsWith('/')) {
     fullUrl += '/';
@@ -17,29 +17,65 @@ async function callApiGet(endpoint: string): any {
   const jwtToken = await getToken();
 
   return fetch(fullUrl, {
-    headers: {
+    headers: authorized ? {
       Authorization: `JWT ${jwtToken}`,
-    },
+    } : {},
   })
-    .then(response =>
-      response
-      .response.json().then(json => ({ json, response })),
-    ).then(({ json, response }) => {
-      if (!response.ok) {
-        return Promise.reject(json);
-      }
+  .then(response => response.json().then(json => ({ json, response })))
+  .then(({ json, response }) => {
+    if (!response.ok) {
+      return Promise.reject(json);
+    }
 
-      const camelizedJson = camelizeKeys(json);
+    const camelizedJson = camelizeKeys(json);
 
-      return camelizedJson;
-    })
-    .then(
-      response => ({ response }),
-      error => ({ error: error.message || 'Something bad happened' }),
-    );
+    return camelizedJson;
+  })
+  .then(
+    response => ({ response }),
+    error => ({ error: error.message || 'Something bad happened' }),
+  );
 }
 
-// export const getAllPlaces = (userId: number): Array<Place> => callApiGet(`users/${userId}/places`);
-export const getAllPlaces = (userId: number): Array<Place> => placesMock;
-// export const getAllPlants = (userId: number): Array<Plant> => callApiGet(`users/${userId}/pots`);
-export const getAllPlants = (userId: number): Array<Plant> => plantsMock;
+async function callApiPost(endpoint: string, body = {}, authorized = true): any {
+  let fullUrl: string = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+  if (!fullUrl.endsWith('/')) {
+    fullUrl += '/';
+  }
+
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+
+  if (authorized) {
+    headers.Authorization = `JWT ${await getToken()}`;
+  }
+
+  return fetch(fullUrl, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  })
+  .then(response => response.json().then(json => ({ json, response })))
+  .then(({ json, response }) => {
+    if (!response.ok) {
+      return Promise.reject(json);
+    }
+
+    const camelizedJson = camelizeKeys(json);
+
+    return camelizedJson;
+  })
+  .then(
+    response => ({ response }),
+    error => ({ error: error.message || 'Something bad happened' }),
+  );
+}
+
+export const logIn = (email: string, password: string): string =>
+    callApiPost('auth/token/', { email, password }, false);
+// export const getAllPlaces = (): Array<Place> => callApiGet(`users/${userId}/places`);
+export const getAllPlaces = (): Array<Place> => placesMock;
+// export const getAllPlants = (): Array<Plant> => callApiGet(`users/${userId}/pots`);
+export const getAllPlants = (): Array<Plant> => plantsMock;

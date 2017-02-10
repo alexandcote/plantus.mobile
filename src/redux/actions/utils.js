@@ -5,9 +5,9 @@ export class Action {
   payload: any;
 }
 
-export function createAction(type: string, payload?: any) {
+export function createAction(type: string, payload?: {}) {
   return {
     type,
-    payload,
+    ...payload,
   };
 }
