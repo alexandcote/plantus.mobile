@@ -50,9 +50,9 @@ const token = getToken();
 const Plantus = () => (
   <Provider store={store}>
     <RouterWithRedux getSceneStyle={getSceneStyle} navigationBarStyle={{ backgroundColor: colors.colorPrimary }}>
-      <Scene key="root">
-        <Scene key="login" component={Login} title="PlantUS" initial />
-        <Scene key="mainTabView" component={MainTabView} title="PlantUS" />
+      <Scene key="root" >
+        <Scene key="login" component={Login} title="PlantUS" />
+        <Scene key="mainTabView" component={MainTabView} title="PlantUS" initial />
       </Scene>
     </RouterWithRedux>
   </Provider>

@@ -3,9 +3,9 @@
 import React, { Component } from 'react';
 import { TextInput, Button, View } from 'react-native';
 import { connect } from 'react-redux';
-import { loginActions } from '../redux/actions';
+import { authActions } from '../redux/actions';
 
-const { logIn } = loginActions;
+const { logIn } = authActions;
 
 type PropTypes = {
   logIn: (email: string, password: string) => void
