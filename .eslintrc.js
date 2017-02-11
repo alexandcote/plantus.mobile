@@ -1,7 +1,7 @@
 module.exports = {
     'extends': [
         'airbnb',
-        "plugin:flowtype/recommended"
+        'plugin:flowtype/recommended'
     ],
     'parser': 'babel-eslint',
     'plugins': [
@@ -16,8 +16,15 @@ module.exports = {
         'react/sort-comp': 0,      
         'import/prefer-default-export': 0,
         'no-shadow': 0,
+        'quote-props': ["error", "consistent"],
+        'no-plusplus': 0,
+        'no-underscore-dangle': 0,
     },
     'globals': {
         'fetch': true,
+        'Request': true,
+        'Headers': true,
+        'Response': true,
+        'Blob': true,
     }
 };

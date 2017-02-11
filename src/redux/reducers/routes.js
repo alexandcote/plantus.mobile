@@ -1,5 +1,4 @@
 // @flow
-
 import { ActionConst } from 'react-native-router-flux';
 import { Action } from '../../types';
 

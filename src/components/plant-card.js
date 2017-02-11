@@ -28,7 +28,7 @@ const PlantCard = (props: { plant: Plant, onClick: Function, style: ViewStyle })
     </View>
     <View style={styles.infoBar}>
       <Text style={styles.infoText}>Hum: {props.plant.humidity}%</Text>
-      <Text style={styles.infoText}>Temp: {props.plant.temperature} C</Text>
+      <Text style={styles.infoText}>Temp: {props.plant.temperature}&deg;C</Text>
     </View>
   </Card>
 );
