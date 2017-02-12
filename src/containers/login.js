@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { TextInput, Button, View, ViewStyle } from 'react-native';
+import { TextInput, Button, View, ViewStyle, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { authActions } from '../redux/actions';
 
@@ -12,6 +12,10 @@ const styles: {[key: string]: ViewStyle} = {
     padding: 10,
     flex: 1,
     backgroundColor: 'white',
+  },
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
   },
 };
 
@@ -29,16 +33,23 @@ class Login extends Component {
   }
 
   launchLogIn= () => {
-    console.log(this.state.email);
     this.props.logIn(this.state.email, this.state.password);
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <TextInput onChangeText={email => this.setState({ email })} />
-        <TextInput onChangeText={password => this.setState({ password })} />
-        <Button title="Log In" onPress={this.launchLogIn} />
+        <Text style={styles.title}>Login</Text>
+        <TextInput
+            keyboardType="email-address"
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })} />
+        <TextInput
+            placeholder="Password"
+            secureTextEntry
+            onChangeText={password => this.setState({ password })} />
+        <Button
+            title="Log In" onPress={this.launchLogIn} />
       </View>
     );
   }

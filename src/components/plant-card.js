@@ -22,8 +22,8 @@ const PlantCard = (props: { plant: Plant, onClick: Function, style: ViewStyle })
   <Card onClick={props.onClick} style={props.style}>
     <View style={{ flex: 4 }}>
       <Image
-        style={{ flex: 1, resizeMode: 'cover' }}
-        source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
+          style={{ flex: 1, resizeMode: 'cover' }}
+          source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
       <Text />
     </View>
     <View style={styles.infoBar}>
