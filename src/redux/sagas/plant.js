@@ -10,7 +10,8 @@ function* fetchPlants() {
   if (plants) {
     yield put(plantActions.loadPlantsSuccess(plants));
   } else {
-    yield put(plantActions.loadPlantsFailure(error));
+    // No error possible yet
+    // yield put(plantActions.loadPlantsFailure(error));
   }
 }
 
