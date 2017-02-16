@@ -28,7 +28,7 @@ const PlaceCard = (props: { place: Place, onClick: Function, style: ViewStyle })
     <View style={styles.infoBar}>
       <Text style={styles.infoText}>Hum: 40 %</Text>
       <Text style={styles.infoText}>Temp: 25 °C</Text>
-      <Text style={styles.infoText}>Plants: TD </Text>
+      <Text style={styles.infoText}>Plants: 3</Text>
     </View>
   </Card>
 );

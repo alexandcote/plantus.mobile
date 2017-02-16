@@ -8,7 +8,7 @@ import { placeActions } from '../actions';
 function* fetchPlaces() {
   const { response, error } = yield call(getAllPlaces);
   if (response) {
-    yield put(placeActions.loadPlacesSuccess(response));
+    yield put(placeActions.loadPlacesSuccess(response.results));
   } else {
     yield put(placeActions.loadPlacesFailure(error));
   }

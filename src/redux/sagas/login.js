@@ -1,3 +1,5 @@
+// @flow
+
 import { put, call, take } from 'redux-saga/effects';
 import { authActions } from '../actions';
 import { logIn, saveJwt } from '../../services/api';

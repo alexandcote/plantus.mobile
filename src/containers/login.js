@@ -42,14 +42,14 @@ class Login extends Component {
         <Text style={styles.title}>Login</Text>
         <TextInput
             keyboardType="email-address"
-            placeholder="Email"
+            placeholder="foo"
             onChangeText={email => this.setState({ email })} />
         <TextInput
             placeholder="Password"
             secureTextEntry
             onChangeText={password => this.setState({ password })} />
         <Button
-            title="Log In" onPress={this.launchLogIn} />
+            title="Sign In" onPress={this.launchLogIn} />
       </View>
     );
   }
