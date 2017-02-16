@@ -1,11 +1,11 @@
 // @flow
-import { placeActions, Action } from '../actions';
+import { placeActions } from '../actions';
 import { Place } from '../../types';
 
-export default function reducer(state: Array<Place> = [], action: Action) {
+export default function reducer(state: Array<Place> = [], action: Object) {
   switch (action.type) {
     case placeActions.LOAD_PLACES_SUCCESS:
-      return action.payload;
+      return action.places;
     default:
       return state;
   }

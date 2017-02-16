@@ -2,10 +2,11 @@
 
 import * as placeActions from './place';
 import * as plantActions from './plant';
-import { Action } from './utils';
+import * as authActions from './auth';
+import * as initActions from './init';
 
 export {
   placeActions,
   plantActions,
-  Action,
+  authActions,
 };

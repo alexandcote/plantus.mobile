@@ -46,9 +46,7 @@ function renderRow(plant: Plant) {
 function rowHasChanged(r1, r2) { return r1 !== r2; }
 
 class PlantList extends Component {
-  state = {
-    dataSource: ListView.DataSource,
-  };
+  state = {};
   props: PropTypes;
 
   constructor(props: PropTypes) {
