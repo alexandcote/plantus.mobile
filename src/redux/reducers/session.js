@@ -1,5 +1,5 @@
 // @flow
-import { authActions, initActions } from '../actions';
+import { authActions } from '../actions';
 
 export type Session = {
   jwt?: string,
@@ -12,8 +12,11 @@ export default function reducer(state: Session = {}, action: Object) {
         ...state,
         jwt: action.jwt,
       };
-    case initActions:
-      return action.session;
+    case authActions.LOG_OUT:
+      return {
+        ...state,
+        jwt: null,
+      };
     default:
       return state;
   }
