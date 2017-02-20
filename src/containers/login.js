@@ -42,7 +42,7 @@ class Login extends Component {
         <Text style={styles.title}>Login</Text>
         <TextInput
             keyboardType="email-address"
-            placeholder="foo"
+            placeholder="Email"
             onChangeText={email => this.setState({ email })} />
         <TextInput
             placeholder="Password"
@@ -55,10 +55,6 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
-}
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   logIn,
 })(Login);

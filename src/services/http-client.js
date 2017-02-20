@@ -18,7 +18,7 @@ class HttpClient {
     this.jwt = jwt;
   }
 
-  auth(jwt: string) {
+  auth(jwt: string): void {
     this.jwt = jwt;
   }
 
