@@ -1,12 +1,15 @@
+// @flow
+
 import { AsyncStorage } from 'react-native';
 import { Session } from '../types';
 
 const KEY_SESSION = 'SESSION';
 
 export async function loadSession(): Session {
-  return AsyncStorage.getItem(KEY_SESSION);
+  const json = await AsyncStorage.getItem(KEY_SESSION);
+  return JSON.parse(json);
 }
 
-export async function saveSession(session: Session): void {
-  return AsyncStorage.setItem(KEY_SESSION, session);
+export async function saveSession(session: Session) {
+  AsyncStorage.setItem(KEY_SESSION, session);
 }

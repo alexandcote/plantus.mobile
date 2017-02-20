@@ -1,5 +1,4 @@
 // @flow
-
 import { put, call, take } from 'redux-saga/effects';
 
 import { getAllPlaces } from '../../services/api';

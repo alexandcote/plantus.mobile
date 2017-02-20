@@ -12,7 +12,7 @@ export default function reducer(state: Session = {}, action: Object) {
         ...state,
         jwt: action.jwt,
       };
-    case initActions:
+    case initActions.RESTORE_STATE_SUCCESS:
       return action.session;
     default:
       return state;

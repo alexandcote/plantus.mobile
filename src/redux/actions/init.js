@@ -1,5 +1,4 @@
 // @flow
-
 import { createAction } from './utils';
 
 export const RESTORE_STATE = 'RESTORE_STATE_REQUEST';

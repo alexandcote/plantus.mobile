@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/prop-types */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Router, Scene, Switch } from 'react-native-router-flux';
 import { Navigator, ViewStyle } from 'react-native';
 import { connect, Provider } from 'react-redux';
@@ -12,7 +12,7 @@ import store from './redux/store';
 
 const RouterWithRedux = connect()(Router);
 
-const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
+const getSceneStyle = (props, computedProps) => {
   const style: ViewStyle = {
     flex: 1,
     backgroundColor: colors.colorPrimary,
@@ -30,22 +30,26 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
   return style;
 };
 
-const Plantus = () => (
-  <Provider store={store}>
-    <RouterWithRedux
-        getSceneStyle={getSceneStyle}
-        navigationBarStyle={{ backgroundColor: colors.colorPrimary }}>
-      <Scene
-          key="root"
-          component={connect(state => ({ jwt: state.session.jwt }))(Switch)}
-          unmountScenes
-          tabs
-          selector={props => (props.jwt ? 'mainTabView' : 'login')}>
-        <Scene key="login" component={Login} title="PlantUS" />
-        <Scene key="mainTabView" component={MainTabView} title="PlantUS" />
-      </Scene>
-    </RouterWithRedux>
-  </Provider>
-);
+class Plantus extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <RouterWithRedux
+            getSceneStyle={getSceneStyle}
+            navigationBarStyle={{ backgroundColor: colors.colorPrimary }}>
+          <Scene
+              key="root"
+              component={connect(state => ({ jwt: state.session.jwt }))(Switch)}
+              unmountScenes
+              tabs
+              selector={props => (props.jwt ? 'mainTabView' : 'login')}>
+            <Scene key="login" component={Login} title="PlantUS" />
+            <Scene key="mainTabView" component={MainTabView} title="PlantUS" />
+          </Scene>
+        </RouterWithRedux>
+      </Provider>
+    );
+  }
+}
 
 export default Plantus;
