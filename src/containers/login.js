@@ -27,6 +27,10 @@ class Login extends Component {
   state = {};
   props: PropTypes;
 
+  static navigationOptions = {
+    title: 'Login',
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -39,7 +43,6 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
         <TextInput
             keyboardType="email-address"
             placeholder="Email"

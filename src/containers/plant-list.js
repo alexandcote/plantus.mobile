@@ -55,7 +55,10 @@ class PlantList extends Component {
     this.state = {
       dataSource: ds,
     };
-    props.loadPlants();
+  }
+
+  componentDidMount() {
+    this.props.loadPlants();
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {

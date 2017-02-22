@@ -12,10 +12,10 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store: Store = composeWithDevTools(
   applyMiddleware(sagaMiddleware),
-  autoRehydrate(),
+  //autoRehydrate(),
 )(createStore)(reducers);
 
-persistStore(store, { storage: AsyncStorage, blacklist: ['plants', 'places', 'initializing'] });
+//persistStore(store, { storage: AsyncStorage, blacklist: ['initializing'] });
 
 sagaMiddleware.run(sagas);
 

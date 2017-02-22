@@ -55,7 +55,10 @@ class PlaceList extends Component {
     this.state = {
       dataSource: ds,
     };
-    props.loadPlaces();
+  }
+
+  componentDidMount() {
+    this.props.loadPlaces();
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {

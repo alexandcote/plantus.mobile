@@ -1,21 +1,36 @@
 // @flow
-import React from 'react';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { TabNavigator } from 'react-navigation';
 
 import PlantList from './plant-list';
 import PlaceList from './place-list';
 import colors from '../styles/colors';
 
-const MainTabView = () => (
-  <ScrollableTabView
-      style={{ marginTop: 0, paddingTop: 0 }}
-      tabBarTextStyle={{ fontSize: 16 }}
-      tabBarUnderlineStyle={{ backgroundColor: colors.activateTabUnderlineColor }}
-      tabBarActiveTextColor="white"
-      tabBarInactiveTextColor="white">
-    <PlantList tabLabel="Plant List" />
-    <PlaceList tabLabel="Place List" />
-  </ScrollableTabView>
-);
+const tabNavigator = TabNavigator({
+  Plants: {
+    screen: PlantList,
+    navigationOptions: {
+      tabBar: {
+        label: 'Plants',
+      },
+    },
+  },
+  Places: {
+    screen: PlaceList,
+    navigationOptions: {
+      tabBar: {
+        label: 'Places',
+      },
+    },
+  },
+}, {
+  initialRouteName: 'Plants',
+  tabBarOptions: {
+    activeBackgroundColor: colors.colorPrimary,
+    inactiveBackgroundColor: colors.colorPrimary,
+    style: {
+      backgroundColor: colors.colorPrimary,
+    },
+  },
+});
 
-export default MainTabView;
+export default tabNavigator;

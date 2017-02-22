@@ -17,6 +17,7 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
 .*/node_modules/react-static-container/lib/StaticContainer.react.js
+.*/__tests__/.*
 
 [include]
 
