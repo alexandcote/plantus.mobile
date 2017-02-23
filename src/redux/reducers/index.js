@@ -8,7 +8,7 @@ import initializing from './init';
 import nav from './nav';
 // ... other reducers
 
-export default combineReducers({
+const appReducer = combineReducers({
   places,
   plants,
   session,
@@ -16,3 +16,12 @@ export default combineReducers({
   nav,
   // ... other reducers
 });
+
+const rootReducer = (state: ?{}, action: Object) => {
+  if (action.type === 'LOG_OUT') {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;

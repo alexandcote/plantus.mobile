@@ -1,11 +1,14 @@
 // @flow
+import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import PlantList from './plant-list';
 import PlaceList from './place-list';
+import Login from './login';
 import colors from '../styles/colors';
 
-const tabNavigator = TabNavigator({
+const MainTabView = TabNavigator({
   Plants: {
     screen: PlantList,
     navigationOptions: {
@@ -33,4 +36,17 @@ const tabNavigator = TabNavigator({
   },
 });
 
-export default tabNavigator;
+type PropTypes = {
+  jwt: string,
+};
+
+const Main = ({ jwt }: PropTypes) => {
+  if (!jwt) {
+    return <Login />;
+  }
+  return <MainTabView />;
+};
+
+export default connect(state => ({
+  jwt: state.session.jwt,
+}))(Main);

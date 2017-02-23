@@ -1,13 +1,12 @@
 // @flow
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import Login from '../containers/login';
 import Drawer from '../containers/drawer';
-import MainTabView from '../containers/main-tab-view';
+import Main from '../containers/main';
 import colors from '../styles/colors';
 
 const stackNavigator = StackNavigator({
-  MainTabView: {
-    screen: MainTabView,
+  Main: {
+    screen: Main,
     navigationOptions: {
       title: 'PlantUS',
     },
