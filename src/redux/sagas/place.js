@@ -13,7 +13,7 @@ function* fetchPlaces() {
     // yield put(placeActions.loadPlacesFailure(error));
   }
 }
-
+ 
 export function* watchLoadPlaces(): any {
   while (true) {
     yield take(placeActions.LOAD_PLACES_REQUEST);

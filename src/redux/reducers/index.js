@@ -4,16 +4,18 @@ import { combineReducers } from 'redux';
 import places from './place';
 import plants from './plant';
 import session from './session';
-import initializing from './init';
+import init from './init';
 import nav from './nav';
+import users from './users';
 // ... other reducers
 
 const appReducer = combineReducers({
   places,
   plants,
   session,
-  initializing,
+  init,
   nav,
+  users,
   // ... other reducers
 });
 

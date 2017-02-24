@@ -4,8 +4,19 @@
 import React, { Component } from 'react';
 import { addNavigationHelpers } from 'react-navigation';
 import { connect, Provider } from 'react-redux';
+import { setTheme, MKColor } from 'react-native-material-kit';
+
 import store from './redux/store';
 import MainNavigator from './routing/main-navigator';
+
+setTheme({
+  checkboxStyle: {
+    fillColor: MKColor.Green,
+    borderOnColor: MKColor.Green,
+    borderOffColor: '#69696C',
+    rippleColor: `${MKColor.Green}26`,
+  },
+});
 
 class Root extends Component {
   render() {

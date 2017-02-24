@@ -6,6 +6,7 @@ import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import PlaceCard from '../components/place-card';
 import { type Place } from '../types';
 import { placeActions } from '../redux/actions';
+import { selectPlaces } from '../redux/selectors';
 
 const { loadPlaces } = placeActions;
 
@@ -81,7 +82,7 @@ class PlaceList extends Component {
 
 function mapStateToProps(state: { places: Array<Place> }) {
   return {
-    places: state.places,
+    places: selectPlaces(state),
   };
 }
 

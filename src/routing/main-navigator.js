@@ -2,6 +2,7 @@
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import Drawer from '../containers/drawer';
 import Main from '../containers/main';
+import NewPlace from '../containers/new-place';
 import colors from '../styles/colors';
 
 const stackNavigator = StackNavigator({
@@ -9,6 +10,12 @@ const stackNavigator = StackNavigator({
     screen: Main,
     navigationOptions: {
       title: 'PlantUS',
+    },
+  },
+  NewPlace: {
+    screen: NewPlace,
+    navigationOptions: {
+      title: 'New Place',
     },
   },
 }, {
