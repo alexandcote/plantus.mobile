@@ -46,7 +46,7 @@ type PropTypes = {
 };
 
 const Main = ({ jwt, initializing, authReady }: PropTypes) => {
-  if (initializing || !authReady) {
+  if (initializing || (!authReady && jwt)) {
     return <ActivityIndicator />;
   }
   if (jwt) {

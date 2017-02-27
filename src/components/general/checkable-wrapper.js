@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet, ViewStyle, TouchableNativeFeedback } from 'react-native';
 import { MKCheckbox } from 'react-native-material-kit';
 
 const styles = StyleSheet.create({
@@ -27,15 +27,27 @@ type OnCheckedChangeParam = {
   checked: boolean,
 }
 
-const CheckableWrapper = ({ children, onChange, style }: PropTypes) => (
-  <View style={[styles.container, style]}>
-    <View style={styles.left}>
-      {children}
-    </View>
-    <View style={styles.right}>
-      <MKCheckbox onCheckedChange={(value: OnCheckedChangeParam) => onChange(value.checked)} />
-    </View>
-  </View>
-);
+class CheckableWrapper extends Component {
+  props: PropTypes;
+  checkBox: MKCheckbox;
+
+  render() {
+    return (
+      <TouchableNativeFeedback onPress={() => this.checkBox.confirmToggle()}>
+        <View style={[styles.container, this.props.style]}>
+          <View style={styles.left}>
+            {this.props.children}
+          </View>
+          <View style={styles.right}>
+            <MKCheckbox
+                ref={(input) => { this.checkBox = input; }}
+                onCheckedChange={(value: OnCheckedChangeParam) =>
+                    this.props.onChange(value.checked)} />
+          </View>
+        </View>
+      </TouchableNativeFeedback>
+    );
+  }
+}
 
 export default CheckableWrapper;

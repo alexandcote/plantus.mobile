@@ -7,7 +7,7 @@ const initialState = {
   authReady: false,
 };
 
-export default function reducer(state = initialState, action: Object) {
+export default function reducer(state: Object = initialState, action: Object) {
   switch (action.type) {
     case REHYDRATE:
       return {
