@@ -24,10 +24,12 @@ const rowHasChanged = (r1, r2) => r1 !== r2;
 export default class CheckableList extends Component {
   state: StateTypes;
   checkedItems: Set<any> = new Set();
+  initialListSize: number;
 
   constructor(props: PropTypes) {
     super(props);
     const ds = new ListView.DataSource({ rowHasChanged }).cloneWithRows(props.items);
+    this.initialListSize = props.items.length;
     this.state = {
       dataSource: ds,
     };
@@ -62,6 +64,7 @@ export default class CheckableList extends Component {
     return (
       <ListView
           enableEmptySections
+          initialListSize={this.initialListSize}
           contentContainerStyle={styles.list}
           renderRow={this.renderRow}
           dataSource={this.state.dataSource} />

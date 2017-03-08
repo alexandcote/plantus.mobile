@@ -8,8 +8,11 @@ import { setTheme, MKColor } from 'react-native-material-kit';
 
 import store from './redux/store';
 import MainNavigator from './routing/main-navigator';
+import colors from './styles/colors';
 
 setTheme({
+  primaryColor: colors.colorPrimary,
+  accentColor: colors.colorAccent,
   checkboxStyle: {
     fillColor: MKColor.Green,
     borderOnColor: MKColor.Green,
