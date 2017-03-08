@@ -19,6 +19,7 @@ module.exports = {
         'quote-props': ["error", "consistent"],
         'no-plusplus': 0,
         'no-underscore-dangle': 0,
+        'arrow-parens': 0,
     },
     'globals': {
         'fetch': true,

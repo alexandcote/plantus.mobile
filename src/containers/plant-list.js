@@ -6,6 +6,7 @@ import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import PlantCard from '../components/plant-card';
 import { type Plant } from '../types';
 import { plantActions } from '../redux/actions';
+import { selectPlants } from '../redux/selectors';
 
 const { loadPlants } = plantActions;
 
@@ -55,7 +56,10 @@ class PlantList extends Component {
     this.state = {
       dataSource: ds,
     };
-    props.loadPlants();
+  }
+
+  componentDidMount() {
+    this.props.loadPlants();
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
@@ -78,7 +82,7 @@ class PlantList extends Component {
 
 function mapStateToProps(state: { plants: Array<Plant> }) {
   return {
-    plants: state.plants,
+    plants: selectPlants(state),
   };
 }
 

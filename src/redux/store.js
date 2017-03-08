@@ -7,15 +7,17 @@ import { autoRehydrate, persistStore } from 'redux-persist';
 
 import reducers from './reducers';
 import sagas from './sagas';
+import apiAuthMiddleware from './middlewares/api-auth-middleware';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store: Store = composeWithDevTools(
   applyMiddleware(sagaMiddleware),
+  applyMiddleware(apiAuthMiddleware),
   autoRehydrate(),
 )(createStore)(reducers);
 
-persistStore(store, { storage: AsyncStorage, blacklist: ['plants', 'places', 'initializing'] });
+persistStore(store, { storage: AsyncStorage, whitelist: ['session'] });
 
 sagaMiddleware.run(sagas);
 

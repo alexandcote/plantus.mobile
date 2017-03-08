@@ -22,7 +22,7 @@ class HttpClient {
     this.jwt = jwt;
   }
 
-  async fetch(endpoint: string, options?: Options): any {
+  async fetch(endpoint: string, options?: Options) {
     let fullUrl: string = (endpoint.startsWith('http')) ? endpoint : this.apiRoot + endpoint;
     if (!fullUrl.endsWith('/')) {
       fullUrl += '/';

@@ -8,4 +8,6 @@ export default class User {
   url: string;
   places: Array<number>;
   placesListing: string;
+
+  name = () => `${this.firstName} ${this.lastName}`;
 }

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { TextInput, Button, View, ViewStyle, Text } from 'react-native';
+import { TextInput, Button, View, ViewStyle } from 'react-native';
 import { connect } from 'react-redux';
 import { authActions } from '../redux/actions';
 
@@ -23,36 +23,53 @@ type PropTypes = {
   logIn: (email: string, password: string) => void
 }
 
-class Login extends Component {
-  state = {};
-  props: PropTypes;
+type FocusableInput = "email" | "password";
 
-  constructor(props) {
+class Login extends Component {
+  props: PropTypes;
+  state = {};
+  focused: FocusableInput = 'email';
+
+  passwordInput: TextInput;
+
+  static navigationOptions = {
+    title: 'Login',
+  }
+
+  constructor(props: PropTypes) {
     super(props);
     this.state = {};
+  }
+
+  focusNextInput = () => {
+    if (this.focused === 'email') {
+      this.passwordInput.focus();
+    }
   }
 
   launchLogIn= () => {
     this.props.logIn(this.state.email, this.state.password);
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
-        <TextInput
-            keyboardType="email-address"
-            placeholder="Email"
-            onChangeText={email => this.setState({ email })} />
-        <TextInput
-            placeholder="Password"
-            secureTextEntry
-            onChangeText={password => this.setState({ password })} />
-        <Button
-            title="Sign In" onPress={this.launchLogIn} />
-      </View>
-    );
-  }
+  render = () => (
+    <View style={styles.container}>
+      <TextInput
+          autoFocus
+          keyboardType="email-address"
+          placeholder="Email"
+          returnKeyType="next"
+          onSubmitEditing={this.focusNextInput}
+          onChangeText={email => this.setState({ email })} />
+      <TextInput
+          ref={(input) => { this.passwordInput = input; }}
+          placeholder="Password"
+          secureTextEntry
+          onSubmitEditing={this.launchLogIn}
+          onChangeText={password => this.setState({ password })} />
+      <Button
+          title="Sign In" onPress={this.launchLogIn} />
+    </View>
+  );
 }
 
 export default connect(null, {

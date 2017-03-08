@@ -3,34 +3,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
+import { MKButton } from 'react-native-material-kit';
 import PlaceCard from '../components/place-card';
+import PlusFab from '../components/general/plus-fab';
 import { type Place } from '../types';
 import { placeActions } from '../redux/actions';
+import { selectPlaces } from '../redux/selectors';
+import colors from '../styles/colors';
+import dimens from '../styles/dimens';
 
 const { loadPlaces } = placeActions;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
   },
   list: {
     justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingBottom: 50,
   },
   item: {
-    margin: 10,
     width: 240,
     height: 160,
     flexGrow: 1,
+    margin: dimens.defaultMargin,
+  },
+  fab: {
+    margin: dimens.defaultMargin,
+    bottom: dimens.fabMargin,
+    right: dimens.fabMargin,
+    position: 'absolute',
   },
 });
 
 type PropTypes = {
   style?: ViewStyle,
   loadPlaces: Function,
-  places: Array<Place>
+  navigation: any,
+  places: Array<Place>,
 }
 
 function renderRow(place: Place) {
@@ -55,7 +67,10 @@ class PlaceList extends Component {
     this.state = {
       dataSource: ds,
     };
-    props.loadPlaces();
+  }
+
+  componentDidMount() {
+    this.props.loadPlaces();
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
@@ -66,11 +81,13 @@ class PlaceList extends Component {
 
   render() {
     return (
-      <View style={[styles.container, this.props.style]}>
-        <ListView
-            contentContainerStyle={styles.list}
-            dataSource={this.state.dataSource}
-            renderRow={renderRow} />
+      <View style={{ flex: 1 }}>
+        <View style={[styles.container, this.props.style]}>
+          <ListView
+              contentContainerStyle={styles.list}
+              dataSource={this.state.dataSource}
+              renderRow={renderRow} />
+        </View>
       </View>
     );
   }
@@ -78,7 +95,7 @@ class PlaceList extends Component {
 
 function mapStateToProps(state: { places: Array<Place> }) {
   return {
-    places: state.places,
+    places: selectPlaces(state),
   };
 }
 

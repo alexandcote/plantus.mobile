@@ -1,10 +1,24 @@
 // @flow
 import { REHYDRATE } from 'redux-persist/constants';
+import { authActions } from '../actions';
 
-export default function reducer(state: boolean = true, action: Object) {
+const initialState = {
+  initializing: true,
+  authReady: false,
+};
+
+export default function reducer(state: Object = initialState, action: Object) {
   switch (action.type) {
     case REHYDRATE:
-      return false;
+      return {
+        ...state,
+        initializing: false,
+      };
+    case authActions.AUTH_READY:
+      return {
+        ...state,
+        authReady: true,
+      };
     default:
       return state;
   }

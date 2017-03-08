@@ -11,11 +11,13 @@ export default function reducer(state: Session = {}, action: Object) {
       return {
         ...state,
         jwt: action.jwt,
+        authReady: false,
       };
     case authActions.LOG_OUT:
       return {
         ...state,
         jwt: null,
+        authReady: false,
       };
     default:
       return state;

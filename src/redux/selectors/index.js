@@ -1,4 +1,5 @@
-export const getSession = state => state.session;
-export const getJwt = state => state.session.jwt;
-export const getPlants = state => state.plants;
-export const getPlaces = state => state.places;
+// @flow
+export const selectSession = (state: any) => state.session;
+export const selectJwt = (state: any) => state.session && state.session.jwt;
+export const selectPlants = (state: any) => state.plants;
+export const selectPlaces = (state: any) => state.places;
