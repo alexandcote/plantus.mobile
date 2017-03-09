@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import { Actions as nav } from 'react-native-router-flux';
+import { Map } from 'immutable';
 
 import PlantCard from '../components/plant-card';
 import PlusFab from '../components/general/plus-fab';
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
 type PropTypes = {
   style?: ViewStyle,
   loadPlants: Function,
-  plants: Array<Plant>
+  plants: Map<number, Plant>
 }
 
 function renderRow(plant: Plant) {
@@ -68,9 +69,11 @@ class PlantList extends Component {
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(nextProps.plants),
-    });
+    if (this.props.plants !== nextProps.plants) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.plants.toArray()),
+      });
+    }
   }
 
   render() {

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import { MKButton } from 'react-native-material-kit';
 import { Actions as nav } from 'react-native-router-flux';
+import { Map } from 'immutable';
+
 import PlaceCard from '../components/place-card';
 import PlusFab from '../components/general/plus-fab';
 import { type Place } from '../types';
@@ -38,7 +40,7 @@ type PropTypes = {
   style?: ViewStyle,
   loadPlaces: Function,
   navigation: any,
-  places: Array<Place>,
+  places: Map<number, Place>,
 }
 
 function renderRow(place: Place) {
@@ -70,9 +72,11 @@ class PlaceList extends Component {
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(nextProps.places),
-    });
+    if (this.props.places !== nextProps.places) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.places.toArray()),
+      });
+    }
   }
 
   render() {
