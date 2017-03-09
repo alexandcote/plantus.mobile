@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import { MKButton } from 'react-native-material-kit';
+import { Actions as nav } from 'react-native-router-flux';
 import PlaceCard from '../components/place-card';
 import PlusFab from '../components/general/plus-fab';
 import { type Place } from '../types';
@@ -11,6 +12,7 @@ import { placeActions } from '../redux/actions';
 import { selectPlaces } from '../redux/selectors';
 import colors from '../styles/colors';
 import dimens from '../styles/dimens';
+import { fabBottomRightStyle } from '../styles';
 
 const { loadPlaces } = placeActions;
 
@@ -29,12 +31,6 @@ const styles = StyleSheet.create({
     height: 160,
     flexGrow: 1,
     margin: dimens.defaultMargin,
-  },
-  fab: {
-    margin: dimens.defaultMargin,
-    bottom: dimens.fabMargin,
-    right: dimens.fabMargin,
-    position: 'absolute',
   },
 });
 
@@ -81,13 +77,18 @@ class PlaceList extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <ListView
               contentContainerStyle={styles.list}
               dataSource={this.state.dataSource}
               renderRow={renderRow} />
         </View>
+        <PlusFab
+            style={fabBottomRightStyle}
+            bgColor={colors.colorPrimary}
+            icColor={colors.colorAccent}
+            onPress={nav.newPlace} />
       </View>
     );
   }

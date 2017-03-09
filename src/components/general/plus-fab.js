@@ -19,7 +19,7 @@ const PlusFab = ({ onPress, bgColor, icColor, style }: PropTypes) => {
                     .withOnPress(onPress)
                     .build();
   return (
-    <View style={[{ backgroundColor: 'transparent' }, style]}>
+    <View style={[{ backgroundColor: 'transparent', padding: 5 }, style]}>
       <Fab>
         <Icon name="plus" size={30} color={icColor} />
       </Fab>

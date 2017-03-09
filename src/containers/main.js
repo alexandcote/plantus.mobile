@@ -1,62 +1,30 @@
 // @flow
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import { connect } from 'react-redux';
+import { StyleSheet } from 'react-native';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import PlantList from './plant-list';
 import PlaceList from './place-list';
-import Login from './login';
 import colors from '../styles/colors';
 
-import NewPlace from './new-place';
-
-const MainTabView = TabNavigator({
-  Plants: {
-    screen: PlantList,
-    navigationOptions: {
-      tabBar: {
-        label: 'Plants',
-      },
-    },
+const styles = StyleSheet.create({
+  tabView: {
+    backgroundColor: colors.colorPrimary,
   },
-  Places: {
-    screen: PlaceList,
-    navigationOptions: {
-      tabBar: {
-        label: 'Places',
-      },
-    },
-  },
-}, {
-  initialRouteName: 'Plants',
-  tabBarOptions: {
-    activeBackgroundColor: colors.colorPrimary,
-    inactiveBackgroundColor: colors.colorPrimary,
-    style: {
-      backgroundColor: colors.colorPrimary,
-    },
+  tabViewUnderline: {
+    backgroundColor: colors.activeTabUnderlineColor,
   },
 });
 
-type PropTypes = {
-  jwt: string,
-  initializing: boolean,
-  authReady: boolean,
-};
+const Main = () => (
+  <ScrollableTabView
+      style={styles.tabView}
+      tabBarActiveTextColor={colors.colorAccent}
+      tabBarInactiveTextColor={colors.colorAccent}
+      tabBarUnderlineStyle={styles.tabViewUnderline}>
+    <PlantList tabLabel="Plants" />
+    <PlaceList tabLabel="Places" />
+  </ScrollableTabView>
+);
 
-const Main = ({ jwt, initializing, authReady }: PropTypes) => {
-  if (initializing || (!authReady && jwt)) {
-    return <ActivityIndicator />;
-  }
-  if (jwt) {
-    return <NewPlace />;
-  }
-  return <Login />;
-};
-
-export default connect(state => ({
-  jwt: state.session.jwt,
-  initializing: state.init.initializing,
-  authReady: state.init.authReady,
-}))(Main);
+export default Main;

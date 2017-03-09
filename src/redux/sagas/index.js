@@ -3,7 +3,7 @@
 import { fork } from 'redux-saga/effects';
 import { watchLoadPlants } from './plant';
 import { watchLoadPlaces } from './place';
-import { watchLogIn } from './login';
+import { watchLogIn, watchLoginInSuccess } from './login';
 import { watchLoadUsers } from './user';
 
 export default function* root(): any {
@@ -11,6 +11,7 @@ export default function* root(): any {
     fork(watchLoadPlants),
     fork(watchLoadPlaces),
     fork(watchLogIn),
+    fork(watchLoginInSuccess),
     fork(watchLoadUsers),
   ];
 }

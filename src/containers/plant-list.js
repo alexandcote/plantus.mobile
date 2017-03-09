@@ -3,10 +3,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
+import { Actions as nav } from 'react-native-router-flux';
+
 import PlantCard from '../components/plant-card';
+import PlusFab from '../components/general/plus-fab';
 import { type Plant } from '../types';
 import { plantActions } from '../redux/actions';
 import { selectPlants } from '../redux/selectors';
+import colors from '../styles/colors';
+import { fabBottomRightStyle } from '../styles';
 
 const { loadPlants } = plantActions;
 
@@ -70,11 +75,17 @@ class PlantList extends Component {
 
   render() {
     return (
-      <View style={[styles.container, this.props.style]}>
-        <ListView
-            contentContainerStyle={styles.list}
-            dataSource={this.state.dataSource}
-            renderRow={renderRow} />
+      <View style={{ flex: 1, paddingBottom: 0 }}>
+        <View style={[styles.container, this.props.style]}>
+          <ListView
+              contentContainerStyle={styles.list}
+              dataSource={this.state.dataSource}
+              renderRow={renderRow} />
+        </View>          
+        <PlusFab
+            style={fabBottomRightStyle}
+            bgColor={colors.colorPrimary}
+            icColor={colors.colorAccent} />
       </View>
     );
   }

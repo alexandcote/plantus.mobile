@@ -1,6 +1,7 @@
 // @flow
 
 import { put, call, take } from 'redux-saga/effects';
+import { Actions as nav } from 'react-native-router-flux';
 import { authActions } from '../actions';
 import { logIn } from '../../services/api';
 
@@ -17,5 +18,12 @@ export function* watchLogIn(): any {
   while (true) {
     const { email, password } = yield take(authActions.LOG_IN_REQUEST);
     yield call(launchLogIn, email, password);
+  }
+}
+
+export function* watchLoginInSuccess(): any {
+  while (true) {
+    yield take(authActions.LOG_IN_SUCCESS);
+    nav.newPlace();
   }
 }
