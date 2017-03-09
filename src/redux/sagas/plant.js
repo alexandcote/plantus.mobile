@@ -2,16 +2,15 @@
 
 import { put, call, take } from 'redux-saga/effects';
 
-import { getAllPlants } from '../../services/api';
+import * as api from '../../services/api';
 import { plantActions } from '../actions';
 
 function* fetchPlants() {
-  const plants = yield call(getAllPlants);
-  if (plants) {
-    yield put(plantActions.loadPlantsSuccess(plants));
+  const { response, error } = yield call(api.getAllPlants);
+  if (response) {
+    yield put(plantActions.loadPlantsSuccess(response.results));
   } else {
-    // No error possible yet
-    // yield put(plantActions.loadPlantsFailure(error));
+    yield put(plantActions.loadPlantsFailure(error));
   }
 }
 

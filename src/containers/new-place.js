@@ -26,10 +26,6 @@ type PropTypes = {
 };
 
 class NewPlace extends Component {
-  static navigationOptions = {
-    title: 'New Place',
-  };
-
   state = {};
   ownersCheckableList: CheckableList;
 
@@ -37,7 +33,6 @@ class NewPlace extends Component {
     super(props);
     this.state = {
       name: '',
-      owners: [],
     };
   }
 
@@ -46,8 +41,13 @@ class NewPlace extends Component {
   }
 
   savePlace = () => {
-    console.log(Array.from(this.ownersCheckableList.getCheckedItems()));
-  }
+    const owners = Array.from(this.ownersCheckableList.getCheckedItems()).map(user => user.id);
+    const place: Place = {
+      name: this.state.name,
+      owners,
+    };
+    this.props.addPlace(place);
+  };
 
   render() {
     return (
@@ -72,4 +72,4 @@ const mapStateToProps = (state) => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { loadUsers })(NewPlace);
+export default connect(mapStateToProps, { loadUsers, addPlace })(NewPlace);

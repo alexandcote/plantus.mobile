@@ -4,21 +4,25 @@ import React from 'react';
 import { View, Text, Image, ViewStyle, StyleSheet } from 'react-native';
 import Card from './general/card';
 import type Place from '../types/place';
+import dimens from '../styles/dimens';
 
 const styles = StyleSheet.create({
   infoBar: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  infoText: {
-    marginRight: 10,
+    paddingLeft: dimens.defaultMargin,
   },
 });
 
-const PlaceCard = (props: { place: Place, onClick: Function, style: ViewStyle }) => (
-  <Card onClick={props.onClick} style={[{ justifyContent: 'center' }, props.style]}>
+type PropTypes = {
+  place: Place,
+  onClick: Function,
+  style: ViewStyle
+};
+
+const PlaceCard = ({ place, onClick, style }: PropTypes) => (
+  <Card onClick={onClick} style={[{ justifyContent: 'center' }, style]}>
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}
@@ -26,9 +30,7 @@ const PlaceCard = (props: { place: Place, onClick: Function, style: ViewStyle })
       <Text />
     </View>
     <View style={styles.infoBar}>
-      <Text style={styles.infoText}>Hum: 40 %</Text>
-      <Text style={styles.infoText}>Temp: 25 °C</Text>
-      <Text style={styles.infoText}>Plants: 3</Text>
+      <Text>{place.name}</Text>
     </View>
   </Card>
 );

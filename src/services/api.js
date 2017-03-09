@@ -1,14 +1,18 @@
 // @flow
 
 import { Place, Plant, User } from '../types';
-import plantsMock from '../containers/plants-mock';
-import placesMock from '../containers/places-mock';
 import http from './http-client';
 
 export const logIn = (email: string, password: string) =>
     http.fetch('auth/token', { method: 'POST', body: { email, password } });
-export const getAllPlaces = (): Array<Place> => placesMock;
-// export const getAllPlants = (): Array<Plant> => callApiGet(`users/${userId}/pots`);
-export const getAllPlants = (): Array<Plant> => plantsMock;
 
-export const getUsers = (): Array<User> => http.fetch('users');
+export const getAllPlaces = (): Array<Place> =>
+    http.fetch('places');
+export const addPlace = (place: Place): void =>
+    http.fetch('places', { method: 'POST', body: place });
+
+export const getAllPlants = (): Array<Plant> =>
+    http.fetch('pots');
+
+export const getUsers = (): Array<User> =>
+    http.fetch('users');

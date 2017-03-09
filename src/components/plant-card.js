@@ -4,17 +4,14 @@ import React from 'react';
 import { View, Text, Image, ViewStyle, StyleSheet } from 'react-native';
 import Card from './general/card';
 import type Plant from '../types/plant';
+import dimens from '../styles/dimens';
 
 const styles = StyleSheet.create({
   infoBar: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  infoText: {
-    marginRight: 10,
-    textAlign: 'center',
+    paddingLeft: dimens.defaultMargin,
   },
 });
 
@@ -27,8 +24,7 @@ const PlantCard = (props: { plant: Plant, onClick: Function, style: ViewStyle })
       <Text />
     </View>
     <View style={styles.infoBar}>
-      <Text style={styles.infoText}>Hum: {props.plant.humidity}%</Text>
-      <Text style={styles.infoText}>Temp: {props.plant.temperature}&deg;C</Text>
+      <Text>{props.plant.name}</Text>
     </View>
   </Card>
 );
