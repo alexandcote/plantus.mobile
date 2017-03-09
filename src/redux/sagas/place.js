@@ -1,5 +1,7 @@
 // @flow
-import { put, call, take } from 'redux-saga/effects';
+import { put, call, take, fork, select } from 'redux-saga/effects';
+import { Actions as nav } from 'react-native-router-flux';
+import { selectPlaces } from '../selectors';
 
 import * as api from '../../services/api';
 import { placeActions } from '../actions';
@@ -18,10 +20,11 @@ function* fetchPlaces() {
 function* addPlace(place: Place) {
   const { response, error } = yield call(api.addPlace, place);
   if (response) {
-    console.log(response);
-    yield put(placeActions.loadPlacesSuccess(response));
+    yield put(placeActions.addPlaceSuccess(response));
+    yield put(placeActions.loadPlaces());
+    yield call(nav.pop);
   } else {
-    yield put(placeActions.loadPlacesFailure(error));
+    yield put(placeActions.addPlaceError(error));
   }
 }
 
@@ -34,7 +37,7 @@ export function* watchLoadPlaces(): any {
 
 export function* watchAddPlace(): any {
   while (true) {
-    const place: Place = yield take(placeActions.ADD_PLACE_REQUEST);
+    const { place } = yield take(placeActions.ADD_PLACE_REQUEST);
     yield call(addPlace, place);
   }
 }

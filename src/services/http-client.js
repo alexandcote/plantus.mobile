@@ -40,6 +40,7 @@ class HttpClient {
     if (options) {
       requestOptions.headers = Object.assign(requestOptions.headers, options.headers);
       if (options.body) {
+        console.log(options.body);
         requestOptions.body = JSON.stringify(options.body);
       }
       if (options.method) {
