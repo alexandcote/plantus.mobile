@@ -62,7 +62,7 @@ class NewPlace extends Component {
             ref={list => { this.ownersCheckableList = list; }}
             items={this.props.users}
             renderRow={user => <PersonItem key={user.id} user={user} />} />
-        <Button title="Save" onPress={this.savePlace} />
+        <Button title="Add Place" onPress={this.savePlace} />
       </View>
     );
   }
