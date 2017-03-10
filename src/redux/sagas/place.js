@@ -1,7 +1,6 @@
 // @flow
-import { put, call, take, fork, select } from 'redux-saga/effects';
+import { put, call, take } from 'redux-saga/effects';
 import { Actions as nav } from 'react-native-router-flux';
-import { selectPlaces } from '../selectors';
 
 import * as api from '../../services/api';
 import { placeActions } from '../actions';

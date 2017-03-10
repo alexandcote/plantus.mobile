@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
-import { MKButton } from 'react-native-material-kit';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
 
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
 type PropTypes = {
   style?: ViewStyle,
   loadPlaces: Function,
-  navigation: any,
   places: Map<number, Place>,
 }
 
@@ -98,7 +96,7 @@ class PlaceList extends Component {
   }
 }
 
-function mapStateToProps(state: { places: Array<Place> }) {
+function mapStateToProps(state: { places: Map<number, Place> }) {
   return {
     places: selectPlaces(state),
   };

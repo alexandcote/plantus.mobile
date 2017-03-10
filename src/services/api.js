@@ -1,6 +1,6 @@
 // @flow
 
-import { Place, Plant, User } from '../types';
+import { Place, PlantType, Plant, User } from '../types';
 import http from './http-client';
 
 export const logIn = (email: string, password: string) =>
@@ -13,6 +13,10 @@ export const addPlace = (place: Place): void =>
 
 export const getAllPlants = (): Array<Plant> =>
     http.fetch('pots');
+export const addPlant = (plant: Plant): void =>
+    http.fetch('pots', { method: 'POST', body: plant });
+export const getAllPlantTypes = (): Array<PlantType> =>
+    http.fetch('plants');
 
 export const getUsers = (): Array<User> =>
     http.fetch('users');

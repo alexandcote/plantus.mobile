@@ -1,16 +1,16 @@
 // @flow
 /* eslint-disable react/prop-types */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Navigator } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { setTheme, MKColor } from 'react-native-material-kit';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Splash from './containers/splash';
 import Main from './containers/main';
 import NewPlace from './containers/new-place';
+import NewPlant from './containers/new-plant';
 import Login from './containers/login';
 
 import store from './redux/store';
@@ -37,7 +37,9 @@ const getSceneStyle = (props, computedProps) => {
     shadowRadius: null,
   };
   if (computedProps.isActive) {
-    style.marginTop = computedProps.hideNavBar ? 0 : Navigator.NavigationBar.Styles.General.TotalNavHeight - 2;
+    style.marginTop = computedProps.hideNavBar
+        ? 0
+        : Navigator.NavigationBar.Styles.General.TotalNavHeight - 2;
   }
   return style;
 };
@@ -59,6 +61,7 @@ const scenes = Actions.create(
     <Scene hideNavBar key="login" component={Login} title="Plantus" />
     <Scene hideNavBar={false} key="main" component={Main} title="Plantus" />
     <Scene hideNavBar={false} key="newPlace" component={NewPlace} title="New Place" />
+    <Scene hideNavBar={false} key="newPlant" component={NewPlant} title="New Plant" />
   </Scene>,
 );
 

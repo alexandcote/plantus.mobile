@@ -8,7 +8,7 @@ import { Map } from 'immutable';
 
 import PlantCard from '../components/plant-card';
 import PlusFab from '../components/general/plus-fab';
-import { type Plant } from '../types';
+import { Plant } from '../types';
 import { plantActions } from '../redux/actions';
 import { selectPlants } from '../redux/selectors';
 import colors from '../styles/colors';
@@ -84,8 +84,9 @@ class PlantList extends Component {
               contentContainerStyle={styles.list}
               dataSource={this.state.dataSource}
               renderRow={renderRow} />
-        </View>          
+        </View>
         <PlusFab
+            onPress={nav.newPlant}
             style={fabBottomRightStyle}
             bgColor={colors.colorPrimary}
             icColor={colors.colorAccent} />
@@ -94,7 +95,7 @@ class PlantList extends Component {
   }
 }
 
-function mapStateToProps(state: { plants: Array<Plant> }) {
+function mapStateToProps(state: { plants: Map<number, Plant> }) {
   return {
     plants: selectPlants(state),
   };

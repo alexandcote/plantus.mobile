@@ -4,7 +4,6 @@ import React from 'react';
 import { ViewStyle, View } from 'react-native';
 import { MKButton } from 'react-native-material-kit';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import colors from '../../styles/colors';
 
 type PropTypes = {
     onPress: () => void,

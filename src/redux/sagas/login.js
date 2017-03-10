@@ -9,6 +9,7 @@ function* launchLogIn(email, password) {
   const { response, error } = yield logIn(email, password);
   if (response) {
     yield put(authActions.logInSuccess(response.token));
+    yield nav.newPlace();
   } else {
     yield put(authActions.logInFailure(error));
   }
@@ -18,12 +19,5 @@ export function* watchLogIn(): any {
   while (true) {
     const { email, password } = yield take(authActions.LOG_IN_REQUEST);
     yield call(launchLogIn, email, password);
-  }
-}
-
-export function* watchLoginInSuccess(): any {
-  while (true) {
-    yield take(authActions.LOG_IN_SUCCESS);
-    nav.newPlace();
   }
 }
