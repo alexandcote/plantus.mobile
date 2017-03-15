@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import { Navigator } from 'react-native';
+import { Navigator, ViewStyle } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { setTheme, MKColor } from 'react-native-material-kit';
 import { Scene, Router, Actions } from 'react-native-router-flux';
@@ -28,7 +28,7 @@ setTheme({
 });
 
 const getSceneStyle = (props, computedProps) => {
-  const style = {
+  const style: ViewStyle = {
     flex: 1,
     backgroundColor: '#fff',
     shadowColor: null,

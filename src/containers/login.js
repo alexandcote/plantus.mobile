@@ -31,11 +31,6 @@ class Login extends Component {
   focused: FocusableInput = 'email';
 
   passwordInput: TextInput;
-
-  static navigationOptions = {
-    title: 'Login',
-  }
-
   constructor(props: PropTypes) {
     super(props);
     this.state = {};
