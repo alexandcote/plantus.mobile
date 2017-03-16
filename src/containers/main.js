@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import MainPlacesList from './place/main-places-list';
-import PlantList from './plant/plant-list';
+import MainPlantList from './plant/main-plant-list';
 import colors from '../styles/colors';
 
 const styles = StyleSheet.create({
@@ -22,7 +22,7 @@ const Main = () => (
       tabBarActiveTextColor={colors.colorAccent}
       tabBarInactiveTextColor={colors.colorAccent}
       tabBarUnderlineStyle={styles.tabViewUnderline}>
-    <PlantList tabLabel="Plants" />
+    <MainPlantList tabLabel="Plants" />
     <MainPlacesList tabLabel="Places" />
   </ScrollableTabView>
 );
