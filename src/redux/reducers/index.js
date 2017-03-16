@@ -7,6 +7,8 @@ import plantTypes from './plant-type';
 import session from './session';
 import init from './init';
 import users from './users';
+import routes from './routes';
+import { authActions } from '../actions';
 // ... other reducers
 
 const appReducer = combineReducers({
@@ -16,7 +18,15 @@ const appReducer = combineReducers({
   session,
   init,
   users,
+  routes,
   // ... other reducers
 });
 
-export default appReducer;
+const rootReducer = (state, action) => {
+  if (action.type === authActions.LOG_OUT) {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;

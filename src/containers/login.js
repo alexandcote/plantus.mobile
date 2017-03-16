@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { TextInput, Button, View, ViewStyle } from 'react-native';
+import { TextInput, Button, View, ViewStyle, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { authActions } from '../redux/actions';
+import colors from '../styles/colors';
 
 const { logIn } = authActions;
 
@@ -48,6 +49,7 @@ class Login extends Component {
 
   render = () => (
     <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
       <TextInput
           autoFocus
           keyboardType="email-address"

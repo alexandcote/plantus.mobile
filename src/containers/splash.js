@@ -31,12 +31,15 @@ class Splash extends Component {
 
   navIfReady() {
     const { initializing, authReady, jwt } = this.props;
+
+    const showLogin = () => nav.login({ type: 'reset' });
+
     if (!initializing) {
       if (authReady) {
         if (jwt) {
           nav.main({ type: 'reset' });
         } else {
-          nav.login();
+          showLogin();
         }
       }
     }

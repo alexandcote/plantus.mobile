@@ -9,7 +9,7 @@ function* launchLogIn(email, password) {
   const { response, error } = yield logIn(email, password);
   if (response) {
     yield put(authActions.logInSuccess(response.token));
-    yield nav.newPlace();
+    yield nav.main({ type: 'reset' });
   } else {
     yield put(authActions.logInFailure(error));
   }
