@@ -6,13 +6,13 @@ import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
 
-import PlantCard from '../components/plant-card';
-import PlusFab from '../components/general/plus-fab';
-import { Plant } from '../types';
-import { plantActions } from '../redux/actions';
-import { selectPlants } from '../redux/selectors';
-import colors from '../styles/colors';
-import { fabBottomRightStyle } from '../styles';
+import PlantCard from '../../components/plant-card';
+import PlusFab from '../../components/general/plus-fab';
+import { Plant } from '../../types';
+import { plantActions } from '../../redux/actions';
+import { selectPlants } from '../../redux/selectors';
+import colors from '../../styles/colors';
+import { fabBottomRightStyle } from '../../styles';
 
 const { loadPlants } = plantActions;
 
@@ -45,7 +45,7 @@ function renderRow(plant: Plant) {
     <PlantCard
         key={plant.id}
         style={styles.item}
-        onClick={() => console.log(`clicked on ${plant.name}`)}
+        onPress={() => console.log(`clicked on ${plant.name}`)}
         plant={plant} />
   );
 }

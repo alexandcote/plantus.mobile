@@ -1,25 +1,22 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
 
 import PlaceCard from '../components/place-card';
 import PlusFab from '../components/general/plus-fab';
 import { type Place } from '../types';
-import { placeActions } from '../redux/actions';
-import { selectPlaces } from '../redux/selectors';
 import colors from '../styles/colors';
 import dimens from '../styles/dimens';
 import { fabBottomRightStyle } from '../styles';
 
-const { loadPlaces } = placeActions;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    flex: 1,
   },
   list: {
     justifyContent: 'center',
@@ -37,19 +34,8 @@ const styles = StyleSheet.create({
 
 type PropTypes = {
   style?: ViewStyle,
-  loadPlaces?: () => void,
   places: Map<number, Place>,
-  onPlantClick: (plantId: number) => void,
-}
-
-function renderRow(place: Place) {
-  return (
-    <PlaceCard
-        key={place.id}
-        style={styles.item}
-        onClick={() => console.log(`clicked on ${place.name}`)}
-        place={place} />
-  );
+  onPlacePress: (place: Place) => any,
 }
 
 function rowHasChanged(r1, r2) { return r1 !== r2; }
@@ -60,34 +46,40 @@ class PlaceList extends Component {
 
   constructor(props: PropTypes) {
     super(props);
-    const ds = new ListView.DataSource({ rowHasChanged });
+    const data = props.places ? props.places.toArray() : [];
+    const ds = new ListView.DataSource({ rowHasChanged })
+        .cloneWithRows(data);
     this.state = {
-      dataSource: ds.cloneWithRows(props.places),
+      dataSource: ds,
     };
-  }
-
-  componentDidMount() {
-    if (this.props.loadPlaces) {
-      this.props.loadPlaces();
-    }
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
     if (this.props.places !== nextProps.places) {
+      const data = nextProps.places ? nextProps.places.toArray() : [];
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.places.toArray()),
+        dataSource: this.state.dataSource.cloneWithRows(data),
       });
     }
   }
+
+  renderRow = (place: Place) => (
+    <PlaceCard
+        key={place.id}
+        style={styles.item}
+        onPress={() => this.props.onPlacePress(place)}
+        place={place} />
+  );
 
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <ListView
+              enableEmptySections
               contentContainerStyle={styles.list}
               dataSource={this.state.dataSource}
-              renderRow={renderRow} />
+              renderRow={this.renderRow} />
         </View>
         <PlusFab
             style={fabBottomRightStyle}
@@ -99,12 +91,4 @@ class PlaceList extends Component {
   }
 }
 
-function mapStateToProps(state: { places: Map<number, Place> }) {
-  return {
-    places: selectPlaces(state),
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadPlaces,
-})(PlaceList);
+export default PlaceList;

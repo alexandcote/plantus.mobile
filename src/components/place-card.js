@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
 
 type PropTypes = {
   place: Place,
-  onClick: Function,
+  onPress: () => any,
   style: ViewStyle
 };
 
-const PlaceCard = ({ place, onClick, style }: PropTypes) => (
-  <Card onClick={onClick} style={[{ justifyContent: 'center' }, style]}>
+const PlaceCard = ({ place, onPress, style }: PropTypes) => (
+  <Card onPress={onPress} style={[{ justifyContent: 'center' }, style]}>
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}

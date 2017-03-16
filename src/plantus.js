@@ -9,9 +9,10 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import Splash from './containers/splash';
 import Main from './containers/main';
-import NewPlace from './containers/new-place';
-import NewPlant from './containers/new-plant';
+import NewPlace from './containers/place/new-place';
+import NewPlant from './containers/plant/new-plant';
 import Login from './containers/login';
+import PlaceDetail from './containers/place/place-detail';
 
 import store from './redux/store';
 import colors from './styles/colors';
@@ -62,6 +63,7 @@ const scenes = Actions.create(
     <Scene hideNavBar={false} key="main" component={Main} title="Plantus" />
     <Scene hideNavBar={false} key="newPlace" component={NewPlace} title="New Place" />
     <Scene hideNavBar={false} key="newPlant" component={NewPlant} title="New Plant" />
+    <Scene hideNavBar={false} key="placeDetail" component={PlaceDetail} title="Place Detail" />
   </Scene>,
 );
 

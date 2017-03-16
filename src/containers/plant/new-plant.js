@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { View, TextInput, Picker, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import { PlantType, Place, Plant } from '../types';
-import { selectPlantTypes, selectPlaces } from '../redux/selectors';
-import { placeActions, plantActions } from '../redux/actions';
-import dimens from '../styles/dimens';
+import { PlantType, Place, Plant } from '../../types';
+import { selectPlantTypes, selectPlaces } from '../../redux/selectors';
+import { placeActions, plantActions } from '../../redux/actions';
+import dimens from '../../styles/dimens';
 
 const { loadPlaces } = placeActions;
 const { loadPlantTypes, addPlant } = plantActions;

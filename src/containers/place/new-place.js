@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import { View, TextInput, StyleSheet, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 
-import { placeActions, userActions } from '../redux/actions';
-import { type Place, User } from '../types';
-import PersonItem from '../components/user-item';
-import CheckableList from '../components/general/checkable-list';
+import { placeActions, userActions } from '../../redux/actions';
+import { type Place, User } from '../../types';
+import PersonItem from '../../components/user-item';
+import CheckableList from '../../components/general/checkable-list';
 
 const { addPlace } = placeActions;
 const { loadUsers } = userActions;
