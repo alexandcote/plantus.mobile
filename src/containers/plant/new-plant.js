@@ -17,7 +17,12 @@ const styles = StyleSheet.create({
     padding: dimens.defaultMargin,
     flexDirection: 'column',
   },
+  input: {
+  },
   button: {
+    height: dimens.inputHeight,
+    position: 'absolute',
+    bottom: 0,
   },
 });
 
@@ -74,7 +79,7 @@ class NewPlant extends Component {
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
-          <TextInput placeholder="Name" onChangeText={name => this.setState({ name })} />
+          <TextInput style={styles.input} placeholder="Name" onChangeText={name => this.setState({ name })} />
           <Picker
               onValueChange={place => this.setState({ place })}
               selectedValue={this.state.place}>
@@ -90,7 +95,7 @@ class NewPlant extends Component {
             }
           </Picker>
         </View>
-        <Button style={{ position: 'absolute', bottom: 0 }} title="Add Plant" onPress={this.addPlant} />
+        <Button style={styles.button} title="Add Plant" onPress={this.addPlant} />
       </View>
     );
   }

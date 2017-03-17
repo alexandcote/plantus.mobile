@@ -13,10 +13,17 @@ const styles: {[key: string]: ViewStyle} = {
     padding: 10,
     flex: 1,
     backgroundColor: 'white',
+    flexDirection: 'column',
   },
   title: {
     fontSize: 30,
     alignSelf: 'center',
+  },
+  input: {
+    height: 40,
+  },
+  button: {
+    height: 40,
   },
 };
 
@@ -49,22 +56,27 @@ class Login extends Component {
 
   render = () => (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Foo</Text>
       <TextInput
+          style={styles.input}
           autoFocus
+          autoCapitalize="none"
           keyboardType="email-address"
           placeholder="Email"
           returnKeyType="next"
           onSubmitEditing={this.focusNextInput}
           onChangeText={email => this.setState({ email })} />
       <TextInput
+          style={styles.input}
           ref={(input) => { this.passwordInput = input; }}
           placeholder="Password"
           secureTextEntry
           onSubmitEditing={this.launchLogIn}
           onChangeText={password => this.setState({ password })} />
       <Button
-          title="Sign In" onPress={this.launchLogIn} />
+          style={styles.button}
+          title="Sign In"
+          onPress={this.launchLogIn} />
     </View>
   );
 }

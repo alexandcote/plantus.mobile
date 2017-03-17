@@ -70,6 +70,7 @@ export default class PlantList extends Component {
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <ListView
+              enableEmptySections
               contentContainerStyle={styles.list}
               dataSource={this.state.dataSource}
               renderRow={this.renderRow} />
