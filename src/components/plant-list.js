@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   list: {
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   item: {
@@ -33,6 +33,7 @@ type PropTypes = {
   style?: ViewStyle,
   plants: Map<number, Plant>,
   onPlantClick: (plant: Plant) => any,
+  renderHeader?: any,
 }
 
 function rowHasChanged(r1, r2) { return r1 !== r2; }
@@ -73,7 +74,8 @@ export default class PlantList extends Component {
               enableEmptySections
               contentContainerStyle={styles.list}
               dataSource={this.state.dataSource}
-              renderRow={this.renderRow} />
+              renderRow={this.renderRow}
+              renderHeader={this.props.renderHeader} />
         </View>
         <PlusFab
             onPress={nav.newPlant}

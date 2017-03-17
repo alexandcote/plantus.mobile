@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
+import { Actions as nav } from 'react-native-router-flux';
 
+import PlantList from '../../components/plant-list';
 import { selectPlantsForPlace } from '../../redux/selectors';
 import { type Place, type Plant } from '../../types';
 
@@ -29,12 +31,16 @@ class PlaceDetail extends Component {
     console.log(this.plants.toArray());
   }
 
+  renderHeader = () => (
+    <Image
+        source={{ uri: 'http://kingofwallpapers.com/villa/villa-004.jpg' }}
+        style={{ resizeMode: 'cover', height: 200 }} />
+  );
+
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-        <Image
-            source={{ uri: 'http://kingofwallpapers.com/villa/villa-004.jpg' }}
-            style={{ flex: 1, resizeMode: 'contain' }} />
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <PlantList plants={this.props.getPlants(this.props.place.id)} onPlantClick={plant => console.log(plant)} renderHeader={this.renderHeader} />
       </View>
     );
   }

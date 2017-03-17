@@ -11,6 +11,7 @@ import { type Place } from '../types';
 import colors from '../styles/colors';
 import dimens from '../styles/dimens';
 import { fabBottomRightStyle } from '../styles';
+import GridList from '../components/general/grid-list';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,9 +25,9 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   item: {
-    width: 240,
     height: 160,
     flexGrow: 1,
+    flex: 1,
     margin: dimens.defaultMargin,
   },
 });
@@ -42,22 +43,20 @@ function rowHasChanged(r1, r2) { return r1 !== r2; }
 class PlaceList extends Component {
   state = {};
   props: PropTypes;
-
+  
   constructor(props: PropTypes) {
     super(props);
-    const data = props.places ? props.places.toArray() : [];
-    const ds = new ListView.DataSource({ rowHasChanged })
-        .cloneWithRows(data);
+
     this.state = {
-      dataSource: ds,
+      places: props.places.toArray(),
     };
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
-    if (this.props.places !== nextProps.places) {
-      const data = nextProps.places ? nextProps.places.toArray() : [];
+    if (nextProps.places !== this.props.places) {
+    console.log(nextProps.places.toArray());
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(data),
+        places: nextProps.places.toArray(),
       });
     }
   }
@@ -74,11 +73,12 @@ class PlaceList extends Component {
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
-          <ListView
+          <GridList
+              columns={2}
               enableEmptySections
               contentContainerStyle={styles.list}
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRow} />
+              items={this.state.places}
+              renderItem={this.renderRow} />
         </View>
         <PlusFab
             style={fabBottomRightStyle}
