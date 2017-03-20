@@ -23,7 +23,8 @@ function splitItems(items: Array<any>, columns: number) {
   if (!items) {
     return [];
   }
-  return List(items).groupBy((value, index) => Math.floor((index / columns))).map(x => x.toArray()).toArray();
+  return List(items)
+      .groupBy((value, index) => Math.floor((index / columns))).toArray();
 }
 
 export default class GridList extends Component {
@@ -49,11 +50,18 @@ export default class GridList extends Component {
     }
   }
 
-  renderRow = (group: []) => (
-    <View style={{ flex: 1, flexDirection: 'row' }}>
-      { group.map(item => this.props.renderItem(item)) }
-    </View>
-  );
+  renderRow = (group: List<any>) => {
+    const items = group.map(item => this.props.renderItem(item)).asMutable();
+    const key = items.reduce((a, b) => a + b.key, '');
+    while (items.size < this.props.columns) {
+      items.push(<View style={[items.get(0).props.style, { opacity: 0 }]} />);
+    }
+    return (
+      <View key={key} style={{ flex: 1, flexDirection: 'row' }}>
+        { items }
+      </View>
+    );
+  }
 
   render() {
     return (
