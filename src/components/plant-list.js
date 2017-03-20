@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, ListView, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
 
 import PlantCard from './plant-card';
+import GridList from '../components/general/grid-list';
 import PlusFab from './general/plus-fab';
 import { Plant } from '../types';
 import colors from '../styles/colors';
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    width: 160,
+    width: 100,
     height: 160,
     flexGrow: 1,
   },
@@ -36,45 +37,41 @@ type PropTypes = {
   renderHeader?: any,
 }
 
-function rowHasChanged(r1, r2) { return r1 !== r2; }
-
 export default class PlantList extends Component {
   state = {};
   props: PropTypes;
 
   constructor(props: PropTypes) {
     super(props);
-    const ds = new ListView.DataSource({ rowHasChanged }).cloneWithRows(props.plants.toArray());
     this.state = {
-      dataSource: ds,
+      plants: props.plants,
     };
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
     if (this.props.plants !== nextProps.plants) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.plants.toArray()),
+        plants: nextProps.plants,
       });
     }
   }
 
   renderRow = (plant: Plant) => (
     <PlantCard
-          key={plant.id}
-          style={styles.item}
-          onPress={() => this.props.onPlantClick(plant)}
-          plant={plant} />
-);
+        key={plant.id}
+        style={styles.item}
+        onPress={() => this.props.onPlantClick(plant)}
+        plant={plant} />
+  );
 
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
-          <ListView
-              enableEmptySections
-              contentContainerStyle={styles.list}
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRow}
+          <GridList
+              columns={2}
+              items={this.state.plants.toArray()}
+              renderItem={this.renderRow}
               renderHeader={this.props.renderHeader} />
         </View>
         <PlusFab

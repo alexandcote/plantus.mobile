@@ -18,12 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
   },
-  list: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingBottom: 50,
-  },
   item: {
     height: 160,
     flexGrow: 1,
@@ -38,12 +32,10 @@ type PropTypes = {
   onPlacePress: (place: Place) => any,
 }
 
-function rowHasChanged(r1, r2) { return r1 !== r2; }
-
 class PlaceList extends Component {
   state = {};
   props: PropTypes;
-  
+
   constructor(props: PropTypes) {
     super(props);
 
@@ -54,7 +46,6 @@ class PlaceList extends Component {
 
   componentWillReceiveProps(nextProps: PropTypes) {
     if (nextProps.places !== this.props.places) {
-    console.log(nextProps.places.toArray());
       this.setState({
         places: nextProps.places.toArray(),
       });
@@ -74,7 +65,7 @@ class PlaceList extends Component {
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <GridList
-              columns={2}
+              columns={1}
               enableEmptySections
               contentContainerStyle={styles.list}
               items={this.state.places}
