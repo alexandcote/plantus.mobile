@@ -40,7 +40,10 @@ class PlaceDetail extends Component {
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
-        <PlantList plants={this.props.getPlants(this.props.place.id)} onPlantClick={plant => console.log(plant)} renderHeader={this.renderHeader} />
+        <PlantList
+            plants={this.props.getPlants(this.props.place.id)}
+            onPlantClick={plant => console.log(plant)}
+            renderHeader={this.renderHeader} />
       </View>
     );
   }

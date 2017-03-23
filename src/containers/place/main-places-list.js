@@ -23,7 +23,7 @@ class MainPlaceList extends Component {
 
   render() {
     return (
-      <PlaceList places={this.props.places} onPlacePress={place => nav.placeDetail({ place })} />
+      <PlaceList places={this.props.places} onPlacePress={place => nav.placeDetail({ place, title: place.name })} />
     );
   }
 }
