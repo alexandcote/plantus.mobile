@@ -25,9 +25,11 @@ class MainPlantList extends Component {
     this.props.requestLoadPlants();
   }
 
-  render() {
-    return <PlantList plants={this.props.plants} onPlantClick={plant => console.log(plant)} />;
-  }
+  render = () => (
+    <PlantList
+        plants={this.props.plants}
+        onPlantClick={plant => nav.plantDetail({ plant, title: plant.name })} />
+  );
 }
 
 function mapStateToProps(state) {

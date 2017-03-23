@@ -25,10 +25,8 @@ class PlaceDetail extends Component {
   props: PropTypes;
   plants: Map<number, Plant>;
 
-  constructor(props: PropTypes) {
-    super(props);
-    this.plants = props.getPlants(props.place.id);
-    console.log(this.plants.toArray());
+  componentDidMount() {
+    this.plants = this.props.getPlants(this.props.place.id);
   }
 
   renderHeader = () => (
