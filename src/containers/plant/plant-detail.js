@@ -5,6 +5,7 @@ import { type Plant, type Spec } from '../../types';
 import Info from '../../components/general/info';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
+import WaterFab from '../../components/general/water-fab';
 
 const styles = StyleSheet.create({
   title: {
@@ -22,6 +23,10 @@ const styles = StyleSheet.create({
   image: {
     height: 200,
     resizeMode: 'cover',
+  },
+  fab: {
+    alignSelf: 'flex-end',
+    margin: dimens.fabMargin,
   },
 });
 
@@ -42,17 +47,20 @@ const PlantDetail = ({ plant }: PropTypes) => {
   const spec = prepareSpec(plant.spec);
   return (
     <View style={{ flex: 1 }}>
-      <Image
-          style={styles.image}
-          source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
-      <Text style={styles.title}>Plant Information</Text>
-      <View style={styles.container}>
-        <Info name="Name" value={plant.name} />
-        <Info name="Humidity" value={spec.humidity} />
-        <Info name="Temperature" value={spec.temperature} />
-        <Info name="Luminosity" value={spec.luminosity} />
-        <Info name="Water Level" value={spec.waterLevel} />
+      <View style={{ flex: 1 }}>
+        <Image
+            style={styles.image}
+            source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
+        <Text style={styles.title}>Plant Information</Text>
+        <View style={styles.container}>
+          <Info name="Name" value={plant.name} />
+          <Info name="Humidity" value={spec.humidity} />
+          <Info name="Temperature" value={spec.temperature} />
+          <Info name="Luminosity" value={spec.luminosity} />
+          <Info name="Water Level" value={spec.waterLevel} />
+        </View>
       </View>
+      <WaterFab style={styles.fab} />
     </View>
   );
 };
