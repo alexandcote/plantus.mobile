@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   input: {
+    height: dimens.inputHeight,
   },
   button: {
     height: dimens.inputHeight,

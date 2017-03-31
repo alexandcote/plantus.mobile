@@ -6,7 +6,7 @@ import Info from '../../components/general/info';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
 import WaterFab from '../../components/general/water-fab';
-import { Droplets, Thermometer } from '../../components/general/icons';
+import { Droplets, Thermometer, Sun } from '../../components/general/icons';
 
 const styles = StyleSheet.create({
   title: {
@@ -36,12 +36,13 @@ type PropTypes = {
 };
 
 function prepareSpec(spec: Spec): Spec {
+  const newSpec = {};
   if (!spec) spec = {};
-  spec.humidity = spec.humidity ? `${spec.humidity} %` : 'N/A';
-  spec.temperature = spec.temperature ? `${spec.temperature} °C` : 'N/A';
-  spec.luminosity = spec.luminosity ? `${spec.luminosity}` : 'N/A';
-  spec.waterLevel = spec.waterLevel ? `${spec.waterLevel}` : 'N/A';
-  return spec;
+  newSpec.humidity = spec.humidity ? `${spec.humidity} %` : 'N/A';
+  newSpec.temperature = spec.temperature ? `${spec.temperature} °C` : 'N/A';
+  newSpec.luminosity = spec.luminosity ? `${spec.luminosity}` : 'N/A';
+  newSpec.waterLevel = spec.waterLevel ? `${spec.waterLevel}` : 'N/A';
+  return newSpec;
 }
 
 const renderInfo = (name: string, value: string, icon: () => any) => (
@@ -63,7 +64,7 @@ const PlantDetail = ({ plant }: PropTypes) => {
         <View style={styles.container}>
           {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}
           {renderInfo('Temperature', spec.temperature, () => <Thermometer scale={0.8} />)}
-          <Info name="Luminosity" value={spec.luminosity} />
+          {renderInfo('Luminosity', spec.luminosity, () => <Sun scale={0.8} />)}
           <Info name="Water Level" value={spec.waterLevel} />
         </View>
       </View>

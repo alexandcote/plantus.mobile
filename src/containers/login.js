@@ -56,7 +56,7 @@ class Login extends Component {
 
   render = () => (
     <View style={styles.container}>
-      <Text style={styles.title}>Foo</Text>
+      <Text style={styles.title}>Login</Text>
       <TextInput
           style={styles.input}
           autoFocus
