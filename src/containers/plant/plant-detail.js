@@ -6,20 +6,15 @@ import Info from '../../components/general/info';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
 import WaterFab from '../../components/general/water-fab';
-import { Droplets, Thermometer, Sun } from '../../components/general/icons';
+import { Droplets, Thermometer, Sun, WaterLevel } from '../../components/general/icons';
 
 const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',
     fontSize: 25,
-    padding: dimens.defaultMargin,
   },
   container: {
-    padding: dimens.containerPadding,
-    borderTopWidth: dimens.dividerThickness,
-    borderBottomWidth: dimens.dividerThickness,
-    borderTopColor: colors.divider,
-    borderBottomColor: colors.divider,
+    margin: dimens.containerPadding,
   },
   image: {
     height: 200,
@@ -28,6 +23,10 @@ const styles = StyleSheet.create({
   fab: {
     alignSelf: 'flex-end',
     margin: dimens.fabMargin,
+  },
+  infoRow: { 
+    flexDirection: 'row',
+    alignItems: 'center' 
   },
 });
 
@@ -46,9 +45,9 @@ function prepareSpec(spec: Spec): Spec {
 }
 
 const renderInfo = (name: string, value: string, icon: () => any) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  <View style={styles.infoRow}>
     {icon()}
-    <Info style={{ flex: 1 }} name={name} value={value} />
+    <Info name={name} value={value} />
   </View>
 );
 
@@ -60,12 +59,12 @@ const PlantDetail = ({ plant }: PropTypes) => {
         <Image
             style={styles.image}
             source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
-        <Text style={styles.title}>Sensors</Text>
         <View style={styles.container}>
+          <Text style={styles.title}>Sensors</Text>
           {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}
           {renderInfo('Temperature', spec.temperature, () => <Thermometer scale={0.8} />)}
           {renderInfo('Luminosity', spec.luminosity, () => <Sun scale={0.8} />)}
-          <Info name="Water Level" value={spec.waterLevel} />
+          {renderInfo('Water Level', spec.waterLevel, () => <WaterLevel scale={0.8} />)}
         </View>
       </View>
       <WaterFab style={styles.fab} icColor="#fff" />

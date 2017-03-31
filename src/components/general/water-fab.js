@@ -22,7 +22,7 @@ const WaterFab = ({ onPress, bgColor = defaultColor, icColor, style }: PropTypes
   return (
     <View style={[{ backgroundColor: 'transparent', padding: 5 }, style]}>
       <Fab>
-        <WaterDrop color={icColor} />
+        <WaterDrop color={icColor} scale={0.8} />
       </Fab>
     </View>
   );

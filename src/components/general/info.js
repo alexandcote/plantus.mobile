@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   container: {
+    flex: 1,
     padding: dimens.defaultMargin,
     flexDirection: 'row',
   },

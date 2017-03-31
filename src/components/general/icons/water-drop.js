@@ -11,7 +11,7 @@ type PropTypes = {
 
 const WaterDrop = ({ scale = 1, color = '#000' }: PropTypes) => {
   const size = 847.372;
-  const baseScale = 0.025;
+  const baseScale = 0.3 * (100 / size);
   const realScale = scale * baseScale;
   const realSize = size * realScale;
   return (
