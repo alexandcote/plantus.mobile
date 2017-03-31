@@ -24,11 +24,15 @@ type PropTypes = {
   style?: ViewStyle,
   name: string,
   value: string,
+  icon?: any,
 };
 
-const Info = ({ name, value, style }: PropTypes) => (
+const Info = ({ name, value, style, icon }: PropTypes) => (
   <View style={[styles.container, style]}>
-    <Text style={styles.name}>{name}</Text>
+    <View style={styles.name}>
+      <View>{icon}</View>
+      <Text>{name}</Text>
+    </View>
     <Text style={styles.value}>{value}</Text>
   </View>
 );

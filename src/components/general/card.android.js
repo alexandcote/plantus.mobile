@@ -5,7 +5,7 @@ import { View, StyleSheet, ViewStyle, TouchableNativeFeedback } from 'react-nati
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
     elevation: 3,
   },
 });

@@ -74,7 +74,8 @@ const Plantus = () => (
     <RouterWithRedux
         scenes={scenes}
         getSceneStyle={getSceneStyle}
-        navigationBarStyle={styles.navBar} />
+        navigationBarStyle={styles.navBar}
+        titleStyle={{ color: colors.colorAccent }} />
   </Provider>
 );
 

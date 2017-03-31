@@ -4,14 +4,17 @@ import React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 
 type PropTypes = {
-  scale: number,
+  scale?: number,
 };
 
-const DropletsIcon = ({ scale }: PropTypes) => {
+const Droplets = ({ scale = 1 }: PropTypes) => {
+  const baseScale = 0.3;
   const size = 100;
+  const realScale = scale * baseScale;
+  const realSize = size * realScale;
   return (
-    <Svg width={100} height={100}>
-      <G scale={scale} originX={50} originY={50}>
+    <Svg width={realSize} height={realSize}>
+      <G scale={realScale}>
         <Path
             fill="#030104"
             d="M19.777,0.465c-0.076-0.62-1.098-0.62-1.174,0C16.051,21.041,3,25.28,3,39.58
@@ -25,4 +28,4 @@ const DropletsIcon = ({ scale }: PropTypes) => {
   );
 };
 
-export default DropletsIcon;
+export default Droplets;

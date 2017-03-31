@@ -5,7 +5,7 @@ import { View, StyleSheet, ViewStyle, TouchableHighlight } from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
   },
 });
 

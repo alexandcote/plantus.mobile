@@ -1,11 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { type Plant, type Spec } from '../../types';
 import Info from '../../components/general/info';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
 import WaterFab from '../../components/general/water-fab';
+import { Droplets, Thermometer } from '../../components/general/icons';
 
 const styles = StyleSheet.create({
   title: {
@@ -43,6 +44,13 @@ function prepareSpec(spec: Spec): Spec {
   return spec;
 }
 
+const renderInfo = (name: string, value: string, icon: () => any) => (
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    {icon()}
+    <Info style={{ flex: 1 }} name={name} value={value} />
+  </View>
+);
+
 const PlantDetail = ({ plant }: PropTypes) => {
   const spec = prepareSpec(plant.spec);
   return (
@@ -51,16 +59,15 @@ const PlantDetail = ({ plant }: PropTypes) => {
         <Image
             style={styles.image}
             source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
-        <Text style={styles.title}>Plant Information</Text>
+        <Text style={styles.title}>Sensors</Text>
         <View style={styles.container}>
-          <Info name="Name" value={plant.name} />
-          <Info name="Humidity" value={spec.humidity} />
-          <Info name="Temperature" value={spec.temperature} />
+          {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}
+          {renderInfo('Temperature', spec.temperature, () => <Thermometer scale={0.8} />)}
           <Info name="Luminosity" value={spec.luminosity} />
           <Info name="Water Level" value={spec.waterLevel} />
         </View>
       </View>
-      <WaterFab style={styles.fab} />
+      <WaterFab style={styles.fab} icColor="#fff" />
     </View>
   );
 };

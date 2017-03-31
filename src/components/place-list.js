@@ -15,7 +15,7 @@ import GridList from '../components/general/grid-list';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     flex: 1,
   },
   item: {
