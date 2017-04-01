@@ -58,7 +58,7 @@ const PlantDetail = ({ plant }: PropTypes) => {
       <View style={{ flex: 1 }}>
         <Image
             style={styles.image}
-            source={{ uri: 'https://cdn.pixabay.com/photo/2016/07/23/00/12/sun-flower-1536088_640.jpg' }} />
+            source={{ uri: 'https://www.garyshood.com/jjc/lightbox/highres.jpg' }} />
         <View style={styles.container}>
           <Text style={styles.title}>Sensors</Text>
           {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}

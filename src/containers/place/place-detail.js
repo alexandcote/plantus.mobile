@@ -31,7 +31,7 @@ class PlaceDetail extends Component {
 
   renderHeader = () => (
     <Image
-        source={{ uri: 'http://kingofwallpapers.com/villa/villa-004.jpg' }}
+        source={{ uri: 'https://i.jamesvillas.co.uk/images/jvh/ui/villa-collection/assets/tile-thumbnail-luxury.jpg' }}
         style={{ resizeMode: 'cover', height: 200 }} />
   );
 

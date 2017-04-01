@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, Text, Button } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Button, InteractionManager } from 'react-native';
 import { connect } from 'react-redux';
 
 import { placeActions, userActions } from '../../redux/actions';
@@ -37,7 +37,7 @@ class NewPlace extends Component {
   }
 
   componentDidMount() {
-    this.props.loadUsers();
+    InteractionManager.runAfterInteractions(this.props.loadUsers);
   }
 
   savePlace = () => {
