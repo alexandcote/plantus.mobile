@@ -4,6 +4,7 @@ import User from './user';
 import Session from './session';
 import PlantType from './plant-type';
 import Spec from './spec';
+import Operation from './operation';
 
 export {
   Place,
@@ -12,4 +13,5 @@ export {
   User,
   Session,
   Spec,
+  Operation,
 };
