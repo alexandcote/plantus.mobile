@@ -26,7 +26,7 @@ const PlaceCard = ({ place, onPress, style }: PropTypes) => (
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}
-          source={{ uri: 'https://i.jamesvillas.co.uk/images/jvh/ui/villa-collection/assets/tile-thumbnail-luxury.jpg' }} />
+          source={{ uri: place.picture }} />
       <Text />
     </View>
     <View style={styles.infoBar}>

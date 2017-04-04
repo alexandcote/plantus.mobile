@@ -6,6 +6,7 @@ export default class Place {
   id: number;
   name: string;
   url: string;
+  picture: string;
 
   static requiredFields = ['id', 'name', 'url'];
 

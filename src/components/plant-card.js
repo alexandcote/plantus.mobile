@@ -15,16 +15,22 @@ const styles = StyleSheet.create({
   },
 });
 
-const PlantCard = (props: { plant: Plant, onPress: () => any, style: ViewStyle }) => (
-  <Card onPress={props.onPress} style={props.style}>
+type PropTypes = {
+  plant: Plant,
+  style: ViewStyle,
+  onPress: () => any,
+};
+
+const PlantCard = ({ plant, onPress, style }: PropTypes) => (
+  <Card onPress={onPress} style={style}>
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}
-          source={{ uri: 'https://www.garyshood.com/jjc/lightbox/highres.jpg' }} />
+          source={{ uri: plant.picture }} />
       <Text />
     </View>
     <View style={styles.infoBar}>
-      <Text>{props.plant.name}</Text>
+      <Text>{plant.name}</Text>
     </View>
   </Card>
 );
