@@ -2,8 +2,10 @@
 
 import React from 'react';
 import { ViewStyle, View } from 'react-native';
-import { MKButton, MKColor } from 'react-native-material-kit';
+import { MKButton } from 'react-native-material-kit';
 import { WaterDrop } from './icons';
+
+import colors from '../../styles/colors';
 
 type PropTypes = {
     onPress?: () => void,
@@ -12,7 +14,7 @@ type PropTypes = {
     style?: ViewStyle
 };
 
-const defaultColor = MKColor.Blue;
+const defaultColor = colors.waterFabColor;
 
 const WaterFab = ({ onPress, bgColor = defaultColor, icColor, style }: PropTypes) => {
   const Fab = MKButton.coloredFab()

@@ -21,7 +21,13 @@ export const getAllPlantTypes = (): Array<PlantType> =>
 export const getUsers = (): Object =>
     http.fetch('users');
 
-export const getOperations = (plantId?: number): Object => {
-  const path = plantId ? `operations?pot=${plantId}` : 'operations';
+export const getOperations = (plantId?: number, completed?: boolean): Object => {
+  let path = plantId ? `operations?pot=${plantId}` : 'operations';
+  if (completed !== undefined) {
+    path += plantId ? '&' : '?';
+    const isCompleted = completed ? '1' : '0';
+    path += `completed=${isCompleted}`;
+  }
+  console.log(path);
   return http.fetch(path);
 };

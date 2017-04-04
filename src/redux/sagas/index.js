@@ -1,19 +1,21 @@
 // @flow
 
 import { fork } from 'redux-saga/effects';
-import { watchLoadPlants, watchAddPlant, watchLoadPlantTypes } from './plant';
+import { loadPlants, addPlant, loadPlantTypes } from './plant';
 import { watchLoadPlaces, watchAddPlace } from './place';
 import { watchLogIn } from './login';
 import { watchLoadUsers } from './user';
+import { loadPlantsWatering } from './operation';
 
 export default function* root(): any {
   yield [
-    fork(watchLoadPlants),
+    fork(loadPlants),
     fork(watchLoadPlaces),
-    fork(watchAddPlant),
-    fork(watchLoadPlantTypes),
+    fork(addPlant),
+    fork(loadPlantTypes),
     fork(watchAddPlace),
     fork(watchLogIn),
     fork(watchLoadUsers),
+    fork(loadPlantsWatering),
   ];
 }

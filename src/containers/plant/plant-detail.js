@@ -1,12 +1,17 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { connect } from 'react-redux';
 import { type Plant, type Spec } from '../../types';
 import Info from '../../components/general/info';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
 import WaterFab from '../../components/general/water-fab';
 import { Droplets, Thermometer, Sun, WaterLevel } from '../../components/general/icons';
+
+import { operationActions } from '../../redux/actions';
+
+const { loadPlantsWatering } = operationActions;
 
 const styles = StyleSheet.create({
   title: {
@@ -24,14 +29,16 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     margin: dimens.fabMargin,
   },
-  infoRow: { 
+  infoRow: {
     flexDirection: 'row',
-    alignItems: 'center' 
+    alignItems: 'center',
   },
 });
 
 type PropTypes = {
     plant: Plant,
+    canWater: boolean,
+    checkIfWatering: () => void,
 };
 
 function prepareSpec(spec: Spec): Spec {
@@ -51,25 +58,41 @@ const renderInfo = (name: string, value: string, icon: () => any) => (
   </View>
 );
 
-const PlantDetail = ({ plant }: PropTypes) => {
-  const spec = prepareSpec(plant.spec);
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <Image
-            style={styles.image}
-            source={{ uri: 'https://www.garyshood.com/jjc/lightbox/highres.jpg' }} />
-        <View style={styles.container}>
-          <Text style={styles.title}>Sensors</Text>
-          {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}
-          {renderInfo('Temperature', spec.temperature, () => <Thermometer scale={0.8} />)}
-          {renderInfo('Luminosity', spec.luminosity, () => <Sun scale={0.8} />)}
-          {renderInfo('Water Level', spec.waterLevel, () => <WaterLevel scale={0.8} />)}
-        </View>
-      </View>
-      <WaterFab style={styles.fab} icColor="#fff" />
-    </View>
-  );
-};
+class PlantDetail extends Component {
+  props: PropTypes;
 
-export default PlantDetail;
+  componentDidMount() {
+    console.log(this.props.checkIfWatering);
+    this.props.checkIfWatering();
+  }
+
+  render = () => {
+    const spec = prepareSpec(this.props.plant.spec);
+    const fabColor = this.props.canWater ? colors.waterFabColor : colors.fabDisabled;
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Image
+              style={styles.image}
+              source={{ uri: 'https://www.garyshood.com/jjc/lightbox/highres.jpg' }} />
+          <View style={styles.container}>
+            <Text style={styles.title}>Sensors</Text>
+            {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}
+            {renderInfo('Temperature', spec.temperature, () => <Thermometer scale={0.8} />)}
+            {renderInfo('Luminosity', spec.luminosity, () => <Sun scale={0.8} />)}
+            {renderInfo('Water Level', spec.waterLevel, () => <WaterLevel scale={0.8} />)}
+          </View>
+        </View>
+        <WaterFab style={styles.fab} icColor="#fff" bgColor={fabColor} />
+      </View>
+    );
+  };
+}
+
+const mapStateToProps = (state, ownProps) => ({
+  canWater: !state.plantsWatering.contains(ownProps.plant.id),
+});
+
+export default connect(mapStateToProps, {
+  checkIfWatering: loadPlantsWatering,
+})(PlantDetail);

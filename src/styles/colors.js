@@ -6,4 +6,6 @@ export default {
   colorAccent: '#fff',
   activeTabUnderlineColor: MKColor.Yellow,
   divider: '#ccc',
+  waterFabColor: MKColor.Blue,
+  fabDisabled: '#ccc',
 };

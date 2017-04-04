@@ -8,6 +8,7 @@ import session from './session';
 import init from './init';
 import users from './users';
 import routes from './routes';
+import plantsWatering from './plantsWatering';
 import { authActions } from '../actions';
 // ... other reducers
 
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   init,
   users,
   routes,
+  plantsWatering,
   // ... other reducers
 });
 
