@@ -8,6 +8,9 @@ import { selectPlantTypes, selectPlaces } from '../../redux/selectors';
 import { placeActions, plantActions } from '../../redux/actions';
 import dimens from '../../styles/dimens';
 
+let foo: string = [2];
+foo += 'bar';
+
 const { loadPlaces } = placeActions;
 const { loadPlantTypes, addPlant } = plantActions;
 
