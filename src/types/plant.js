@@ -8,6 +8,7 @@ export default class Plant {
   name: string;
   spec: ?Spec;
   picture: string;
+  identifier: string;
 
   static requiredFields = ['id', 'name'];
 

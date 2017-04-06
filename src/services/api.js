@@ -15,6 +15,8 @@ export const getAllPlants = (): Object =>
     http.fetch('pots');
 export const addPlant = (plant: Plant): Object =>
     http.fetch('pots', { method: 'POST', body: plant });
+export const patchPlant = (plantId: number, plant: Plant): Object =>
+    http.fetch(`pots/${plantId}`, { method: 'PATCH', body: plant });
 export const getAllPlantTypes = (): Array<PlantType> =>
     http.fetch('plants');
 

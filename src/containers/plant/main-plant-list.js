@@ -28,7 +28,7 @@ class MainPlantList extends Component {
   render = () => (
     <PlantList
         plants={this.props.plants}
-        onPlantClick={plant => nav.plantDetail({ plant, title: plant.name })} />
+        onPlantClick={plant => nav.plantImageStep({ plant, title: plant.name })} />
   );
 }
 

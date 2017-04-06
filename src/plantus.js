@@ -14,6 +14,7 @@ import NewPlant from './containers/plant/new-plant';
 import Login from './containers/login';
 import PlaceDetail from './containers/place/place-detail';
 import PlantDetail from './containers/plant/plant-detail';
+import PlantImageStep from './containers/plant/plant-image-step';
 
 import store from './redux/store';
 import colors from './styles/colors';
@@ -66,6 +67,7 @@ const scenes = Actions.create(
     <Scene hideNavBar={false} key="newPlant" component={NewPlant} title="New Plant" />
     <Scene hideNavBar={false} key="placeDetail" component={PlaceDetail} title="Place Detail" />
     <Scene hideNavBar={false} key="plantDetail" component={PlantDetail} title="Plant Detail" />
+    <Scene hideNavBar key="plantImageStep" component={PlantImageStep} title="Plant Image" />
   </Scene>,
 );
 

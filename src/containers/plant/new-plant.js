@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import { View, TextInput, Picker, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
+import ImagePicker from 'react-native-image-crop-picker';
 import { PlantType, Place, Plant } from '../../types';
 import { selectPlantTypes, selectPlaces } from '../../redux/selectors';
 import { placeActions, plantActions } from '../../redux/actions';
 import dimens from '../../styles/dimens';
-
-let foo: string = [2];
-foo += 'bar';
 
 const { loadPlaces } = placeActions;
 const { loadPlantTypes, addPlant } = plantActions;
@@ -49,6 +47,7 @@ class NewPlant extends Component {
       name: '',
       plantType: null,
       place: null,
+      identifier: '',
     };
   }
 
@@ -75,8 +74,19 @@ class NewPlant extends Component {
       name: this.state.name,
       place: this.state.place,
       plant: this.state.plantType,
+      identifier: this.state.identifier,
     };
     this.props.addPlant(plant);
+  }
+
+  openImagePicker = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 200,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
   }
 
   render() {
@@ -98,6 +108,14 @@ class NewPlant extends Component {
               <Picker.Item key={plantType.id} label={plantType.name} value={plantType.id} />))
             }
           </Picker>
+          <TextInput
+              style={styles.input}
+              placeholder="Identifier"
+              onChangeText={identifier => this.setState({ identifier })} />
+          <Button
+              style={styles.button}
+              title="Pick an image"
+              onPress={this.openImagePicker} />
         </View>
         <Button style={styles.button} title="Add Plant" onPress={this.addPlant} />
       </View>

@@ -38,11 +38,16 @@ class HttpClient {
     if (this.jwt) {
       requestOptions.headers.Authorization = `JWT ${this.jwt}`;
     }
-
     if (options) {
       requestOptions.headers = Object.assign(requestOptions.headers, options.headers);
       if (options.body) {
-        requestOptions.body = JSON.stringify(options.body);
+        if (options.body instanceof FormData) { // eslint-disable-line
+          requestOptions.body = options.body;
+          requestOptions.headers['Content-Type'] = 'multipart/form-data';
+          console.log(options.body);
+        } else {
+          requestOptions.body = JSON.stringify(options.body);
+        }
       }
       if (options.method) {
         requestOptions.method = options.method;

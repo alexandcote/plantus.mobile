@@ -1,9 +1,10 @@
 // @flow
 
-import { put, call, take } from 'redux-saga/effects';
-import { Actions as nav } from 'react-native-router-flux';
+import { put, call, take, takeEvery } from 'redux-saga/effects';
+import { Actions as nav, ActionConst } from 'react-native-router-flux';
 
 import * as api from '../../services/api';
+import { objectToFormData } from '../../services/utils';
 import { plantActions } from '../actions';
 
 export function* loadPlants(): any {
@@ -25,9 +26,9 @@ export function* addPlant(): any {
     if (response) {
       yield put(plantActions.addPlantSuccess(response));
       yield put(plantActions.loadPlants());
-      yield call(nav.pop);
+      yield call(nav.plantDetail, { type: ActionConst.REPLACE, plant: response });
     } else {
-      yield put(plantActions.addPlantError(error));
+      yield put(plantActions.addPlantFailure(error));
     }
   }
 }
@@ -42,4 +43,20 @@ export function* loadPlantTypes(): any {
       yield put(plantActions.loadPlantTypesFailure(error));
     }
   }
+}
+
+function* executePatchPlant({ plantId, plant }) {
+  const apiCall = plant.picture ?
+      () => api.patchPlant(plantId, objectToFormData(plant)) :
+      () => api.patchPlant(plantId, plant);
+  const { response, error } = yield call(apiCall);
+  if (response) {
+    yield put(plantActions.patchPlantSuccess());
+  } else {
+    yield put(plantActions.patchPlantFailure(error));
+  }
+}
+
+export function* patchPlant(): any {
+  yield takeEvery(plantActions.PATCH_PLANT_REQUEST, executePatchPlant);
 }
