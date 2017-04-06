@@ -7,6 +7,8 @@ export default function reducer(state: Map<number, Plant> = Map(), action: Objec
   switch (action.type) {
     case plantActions.LOAD_PLANTS_SUCCESS:
       return Map(action.plants.map(plant => [plant.id, plant]));
+    case plantActions.PATCH_PLANT_SUCCESS:
+      return state.set(action.plant.id, action.plant);
     default:
       return state;
   }

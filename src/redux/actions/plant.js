@@ -15,6 +15,10 @@ export const PATCH_PLANT_REQUEST = 'PATCH_PLANT_REQUEST';
 export const PATCH_PLANT_SUCCESS = 'PATCH_PLANT_SUCCESS';
 export const PATCH_PLANT_FAILURE = 'PATCH_PLANT_FAILURE';
 
+export const PLANT_IMAGE_STEP_REQUEST = 'PLANT_IMAGE_STEP_REQUEST';
+export const PLANT_IMAGE_STEP_SUCCESS = 'PLANT_IMAGE_STEP_SUCCESS';
+export const PLANT_IMAGE_STEP_FAILURE = 'PLANT_IMAGE_STEP_FAILURE';
+
 export const LOAD_PLANT_TYPES_REQUEST = 'LOAD_PLANT_TYPES_REQUEST';
 export const LOAD_PLANT_TYPES_SUCCESS = 'LOAD_PLANT_TYPES_SUCCESS';
 export const LOAD_PLANTS_TYPES_FAILURE = 'LOAD_PLANTS_TYPES_FAILURE';
@@ -34,6 +38,13 @@ export const patchPlant = (plantId: number, plant: Plant) =>
     createAction(PATCH_PLANT_REQUEST, { plantId, plant });
 export const patchPlantSuccess = (plant: Plant) => createAction(PATCH_PLANT_SUCCESS, { plant });
 export const patchPlantFailure = (error: string) => createAction(PATCH_PLANT_FAILURE, { error });
+
+export const plantImageStep = (plantId: number, image: any) =>
+    createAction(PLANT_IMAGE_STEP_REQUEST, { plantId, image });
+export const plantImageStepSuccess = (plant: Plant) =>
+    createAction(PLANT_IMAGE_STEP_SUCCESS, { plant });
+export const plantImageStepFailure = (error: string) =>
+    createAction(PLANT_IMAGE_STEP_FAILURE, { error });
 
 export const loadPlantTypes =
     () => createAction(LOAD_PLANT_TYPES_REQUEST);
