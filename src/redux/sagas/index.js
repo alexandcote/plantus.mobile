@@ -1,7 +1,7 @@
 // @flow
 
 import { fork } from 'redux-saga/effects';
-import { loadPlants, addPlant, loadPlantTypes, patchPlant } from './plant';
+import { loadPlants, addPlant, loadPlantTypes, patchPlant, plantImageStep } from './plant';
 import { watchLoadPlaces, watchAddPlace } from './place';
 import { watchLogIn } from './login';
 import { watchLoadUsers } from './user';
@@ -18,5 +18,6 @@ export default function* root(): any {
     fork(watchLoadUsers),
     fork(loadPlantsWatering),
     fork(patchPlant),
+    fork(plantImageStep),
   ];
 }
