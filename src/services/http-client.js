@@ -44,7 +44,6 @@ class HttpClient {
         if (options.body instanceof FormData) { // eslint-disable-line
           requestOptions.body = options.body;
           requestOptions.headers['Content-Type'] = 'multipart/form-data';
-          console.log(options.body);
         } else {
           requestOptions.body = JSON.stringify(options.body);
         }

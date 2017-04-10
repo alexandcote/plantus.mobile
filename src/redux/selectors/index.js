@@ -10,4 +10,6 @@ export const selectPlant: (state: any, plantId: number) => Plant
 export const selectPlantsForPlace: (state: any, placeId: number) => Map<number, Plant>
     = (state, placeId) => state.plants.filter(plant => plant.place === placeId);
 export const selectPlaces: (state: any) => Map<number, Place> = state => state.places;
+export const selectPlace: (state: any, placeId: number) => Place
+    = (state, placeId) => selectPlaces(state).get(placeId);
 export const selectPlantTypes: (state: any) => Map<number, PlantType> = state => state.plantTypes;

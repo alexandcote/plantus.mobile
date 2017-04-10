@@ -10,6 +10,8 @@ export const getAllPlaces = (): Object =>
     http.fetch('places');
 export const addPlace = (place: Place): Object =>
     http.fetch('places', { method: 'POST', body: place });
+export const patchPlace = (placeId: number, place: Place): Object =>
+    http.fetch(`places/${placeId}`, { method: 'PATCH', body: place });
 
 export const getAllPlants = (): Object =>
     http.fetch('pots');

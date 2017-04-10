@@ -1,7 +1,9 @@
 // @flow
-import { put, call, take } from 'redux-saga/effects';
-import { Actions as nav } from 'react-native-router-flux';
+import { put, call, take, select } from 'redux-saga/effects';
+import { Actions as nav, ActionConst } from 'react-native-router-flux';
 
+import { selectPlace } from '../selectors';
+import { objectToFormData } from '../../services/utils';
 import * as api from '../../services/api';
 import { placeActions } from '../actions';
 
@@ -16,17 +18,6 @@ function* fetchPlaces() {
   }
 }
 
-function* addPlace(place: Place) {
-  const { response, error } = yield call(api.addPlace, place);
-  if (response) {
-    yield put(placeActions.addPlaceSuccess(response));
-    yield put(placeActions.loadPlaces());
-    yield call(nav.pop);
-  } else {
-    yield put(placeActions.addPlaceError(error));
-  }
-}
-
 export function* watchLoadPlaces(): any {
   while (true) {
     yield take(placeActions.LOAD_PLACES_REQUEST);
@@ -34,9 +25,32 @@ export function* watchLoadPlaces(): any {
   }
 }
 
-export function* watchAddPlace(): any {
+export function* addPlace(): any {
   while (true) {
     const { place } = yield take(placeActions.ADD_PLACE_REQUEST);
-    yield call(addPlace, place);
+    const { response, error } = yield call(api.addPlace, place);
+    if (response) {
+      yield put(placeActions.addPlaceSuccess(response));
+      yield put(placeActions.loadPlaces());
+      yield call(nav.placeImageStep);
+    } else {
+      yield put(placeActions.addPlaceError(error));
+    }
+  }
+}
+
+export function* placeImageStep(): any {
+  while (true) {
+    const { placeId, image } = yield take(placeActions.PLACE_IMAGE_STEP_REQUEST);
+    const place = objectToFormData({ picture: image });
+    const { response, error } = yield call(api.patchPlace, placeId, place);
+    if (response) {
+      yield put(placeActions.patchPlaceSuccess({ partialPlace: response, placeId }));
+      yield put(placeActions.placeImageStepSuccess(response));
+      const place = yield select(selectPlace, placeId);
+      yield call(nav.placeDetail, { type: ActionConst.REPLACE, place });
+    } else {
+      yield put(placeActions.placeImageStepFailure(error));
+    }
   }
 }

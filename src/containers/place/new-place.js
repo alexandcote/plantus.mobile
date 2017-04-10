@@ -9,6 +9,8 @@ import { type Place, User } from '../../types';
 import PersonItem from '../../components/user-item';
 import CheckableList from '../../components/general/checkable-list';
 
+import dimens from '../../styles/dimens';
+
 const { addPlace } = placeActions;
 const { loadUsers } = userActions;
 
@@ -16,6 +18,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     flex: 1,
+  },
+  input: {
+    marginBottom: dimens.defaultMargin,
   },
 });
 
@@ -33,6 +38,7 @@ class NewPlace extends Component {
     super(props);
     this.state = {
       name: '',
+      identifier: '',
     };
   }
 
@@ -45,6 +51,7 @@ class NewPlace extends Component {
     const place: Place = {
       name: this.state.name,
       owners,
+      identifier: this.state.identifier,
     };
     this.props.addPlace(place);
   };
@@ -53,7 +60,7 @@ class NewPlace extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-            style={{ marginBottom: 10 }}
+            style={styles.input}
             placeholder="Name"
             onChangeText={text => this.setState({ name: text })} />
 
@@ -62,6 +69,10 @@ class NewPlace extends Component {
             ref={list => { this.ownersCheckableList = list; }}
             items={this.props.users}
             renderRow={user => <PersonItem key={user.id} user={user} />} />
+        <TextInput
+            style={styles.input}
+            placeholder="Identifier"
+            onChangeText={identifier => this.setState({ identifier })} />
         <Button title="Add Place" onPress={this.savePlace} />
       </View>
     );
