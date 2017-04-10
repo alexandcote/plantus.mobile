@@ -5,7 +5,7 @@ import { loadPlants, addPlant, loadPlantTypes, patchPlant, plantImageStep } from
 import { watchLoadPlaces, watchAddPlace } from './place';
 import { watchLogIn } from './login';
 import { watchLoadUsers } from './user';
-import { loadPlantsWatering } from './operation';
+import { loadPlantsWatering, waterPlant } from './operation';
 
 export default function* root(): any {
   yield [
@@ -19,5 +19,6 @@ export default function* root(): any {
     fork(loadPlantsWatering),
     fork(patchPlant),
     fork(plantImageStep),
+    fork(waterPlant),
   ];
 }

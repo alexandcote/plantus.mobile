@@ -11,7 +11,7 @@ import { Droplets, Thermometer, Sun, WaterLevel } from '../../components/general
 
 import { operationActions } from '../../redux/actions';
 
-const { loadPlantsWatering } = operationActions;
+const { loadPlantsWatering, waterPlant } = operationActions;
 
 const styles = StyleSheet.create({
   title: {
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
 type PropTypes = {
     plant: Plant,
     canWater: boolean,
+    waterPlant: () => void,
     checkIfWatering: () => void,
 };
 
@@ -82,7 +83,7 @@ class PlantDetail extends Component {
             {renderInfo('Water Level', spec.waterLevel, () => <WaterLevel scale={0.8} />)}
           </View>
         </View>
-        <WaterFab style={styles.fab} icColor="#fff" bgColor={fabColor} />
+        <WaterFab style={styles.fab} icColor="#fff" bgColor={fabColor} onPress={this.props.waterPlant} />
       </View>
     );
   };
@@ -92,6 +93,9 @@ const mapStateToProps = (state, ownProps) => ({
   canWater: !state.plantsWatering.contains(ownProps.plant.id),
 });
 
-export default connect(mapStateToProps, {
-  checkIfWatering: loadPlantsWatering,
-})(PlantDetail);
+const mapActionsToDispatch = (dispatch, ownProps) => ({
+  checkIfWatering: () => dispatch(loadPlantsWatering()),
+  waterPlant: () => dispatch(waterPlant(ownProps.plant.id)),
+});
+
+export default connect(mapStateToProps, mapActionsToDispatch)(PlantDetail);

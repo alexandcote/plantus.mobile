@@ -79,16 +79,6 @@ class NewPlant extends Component {
     this.props.addPlant(plant);
   }
 
-  openImagePicker = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 200,
-      cropping: true,
-    }).then(image => {
-      console.log(image);
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -112,10 +102,6 @@ class NewPlant extends Component {
               style={styles.input}
               placeholder="Identifier"
               onChangeText={identifier => this.setState({ identifier })} />
-          <Button
-              style={styles.button}
-              title="Pick an image"
-              onPress={this.openImagePicker} />
         </View>
         <Button style={styles.button} title="Add Plant" onPress={this.addPlant} />
       </View>

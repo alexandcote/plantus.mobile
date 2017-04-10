@@ -1,6 +1,6 @@
 // @flow
 
-import { Place, PlantType, Plant, User } from '../types';
+import { Place, PlantType, Plant, User, Operation } from '../types';
 import http from './http-client';
 
 export const logIn = (email: string, password: string) =>
@@ -23,13 +23,16 @@ export const getAllPlantTypes = (): Array<PlantType> =>
 export const getUsers = (): Object =>
     http.fetch('users');
 
-export const getOperations = (plantId?: number, completed?: boolean): Object => {
-  let path = plantId ? `operations?pot=${plantId}` : 'operations';
+export const getOperations = (completed?: boolean): Object => {
+  let path = 'operations';
+  // TODO: Put in http client instead
   if (completed !== undefined) {
-    path += plantId ? '&' : '?';
+    path += '?';
     const isCompleted = completed ? '1' : '0';
     path += `completed=${isCompleted}`;
   }
-  console.log(path);
   return http.fetch(path);
 };
+
+export const addOperation = (operation: Operation): Object =>
+    http.fetch('operations', { method: 'POST', body: operation });

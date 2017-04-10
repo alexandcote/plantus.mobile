@@ -11,8 +11,8 @@ export const WATER_PLANT_REQUEST = 'WATER_PLANT_REQUEST';
 export const WATER_PLANT_SUCCESS = 'WATER_PLANT_SUCCESS';
 export const WATER_PLANT_FAILURE = 'WATER_PLANT_FAILURE';
 
-export const loadPlantsWatering = (plantId?: number) =>
-    createAction(LOAD_PLANTS_WATERING_REQUEST, { plantId });
+export const loadPlantsWatering = () =>
+    createAction(LOAD_PLANTS_WATERING_REQUEST);
 export const loadPlantsWateringSuccess = (plantIds: Set<number>) =>
     createAction(LOAD_PLANTS_WATERING_SUCCESS, { plantIds });
 export const loadPlantsWateringFailure = (error: string) =>

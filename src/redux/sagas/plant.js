@@ -71,7 +71,6 @@ export function* plantImageStep(): any {
       yield put(plantActions.patchPlantSuccess(response));
       yield put(plantActions.plantImageStepSuccess(response));
       const plant = yield select(selectPlant, plantId);
-      console.log(plant);
       yield call(nav.plantDetail, { type: ActionConst.REPLACE, plant });
     } else {
       yield put(plantActions.plantImageStepFailure(error));
