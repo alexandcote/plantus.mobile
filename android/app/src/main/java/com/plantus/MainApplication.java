@@ -2,12 +2,11 @@ package com.plantus;
 
 import android.app.Application;
 
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.facebook.react.ReactApplication;
-import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,10 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new PickerPackage(),
             new SvgPackage(),
-            new VectorIconsPackage(),
-            new ReactMaterialKitPackage()
+            new ImagePickerPackage(),
+            new ReactMaterialKitPackage(),
+            new VectorIconsPackage()
       );
     }
   };

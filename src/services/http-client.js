@@ -24,9 +24,7 @@ class HttpClient {
 
   async fetch(endpoint: string, options?: Options) {
     let fullUrl: string = (endpoint.startsWith('http')) ? endpoint : this.apiRoot + endpoint;
-    if (!fullUrl.endsWith('/')
-        && options
-        && options.method !== 'GET') {
+    if (true) {
       fullUrl += '/';
     }
 

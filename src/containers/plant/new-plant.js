@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { View, TextInput, Picker, StyleSheet, Button } from 'react-native';
+import { View, TextInput, StyleSheet, Button, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import ImagePicker from 'react-native-image-crop-picker';
+import { Container, Picker, Content } from 'native-base';
 import { PlantType, Place, Plant } from '../../types';
 import { selectPlantTypes, selectPlaces } from '../../redux/selectors';
 import { placeActions, plantActions } from '../../redux/actions';
@@ -83,15 +83,19 @@ class NewPlant extends Component {
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
-          <TextInput style={styles.input} placeholder="Name" onChangeText={name => this.setState({ name })} />
+          <TextInput style={styles.input} placeholder="Plant Name" onChangeText={name => this.setState({ name })} />
+          <Text>Select the place</Text>
           <Picker
+              mode="dropdown"
               onValueChange={place => this.setState({ place })}
               selectedValue={this.state.place}>
             { this.props.places.toArray().map(place => (
               <Picker.Item key={place.id} label={place.name} value={place.id} />))
             }
           </Picker>
+          <Text>Select the plant type</Text>
           <Picker
+              mode="dropdown"
               onValueChange={plantType => this.setState({ plantType })}
               selectedValue={this.state.plantType}>
             { this.props.plantTypes.toArray().map(plantType => (

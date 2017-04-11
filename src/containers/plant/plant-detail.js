@@ -74,7 +74,7 @@ class PlantDetail extends Component {
         <View style={{ flex: 1 }}>
           <Image
               style={styles.image}
-              source={{ uri: this.props.plant.picture }} />
+              source={{ uri: this.props.plant.picture ? this.props.plant.picture : undefined }} />
           <View style={styles.container}>
             <Text style={styles.title}>Sensors</Text>
             {renderInfo('Humidity', spec.humidity, () => <Droplets scale={0.8} />)}

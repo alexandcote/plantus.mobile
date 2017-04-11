@@ -31,7 +31,7 @@ class PlaceDetail extends Component {
 
   renderHeader = () => (
     <Image
-        source={{ uri: this.props.place.picture }}
+        source={{ uri: this.props.place.picture ? this.props.place.picture : undefined }}
         style={{ resizeMode: 'cover', height: 200 }} />
   );
 
