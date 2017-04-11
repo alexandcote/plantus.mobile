@@ -10,6 +10,7 @@ const apiAuthMiddleware = ({ getState }) => next => action => {
   const newToken = selectJwt(getState());
 
   if (oldToken !== newToken) {
+    console.log(newToken);
     httpClient.auth(newToken);
   }
 

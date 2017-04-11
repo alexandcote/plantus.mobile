@@ -11,16 +11,7 @@
       "request": "launch",
       "platform": "ios",
       "sourceMaps": true,
-      "target": "iPhone 6s",
-      "outDir": "${workspaceRoot}/.vscode/.react"
-    },
-    {
-      "name": "Debug Android",
-      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
-      "type": "reactnative",
-      "request": "launch",
-      "platform": "android",
-      "sourceMaps": true,
+      "target": "iPhone 5s",
       "outDir": "${workspaceRoot}/.vscode/.react"
     }
   ]

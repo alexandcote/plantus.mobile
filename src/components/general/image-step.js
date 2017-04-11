@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-picker';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import dimens from '../../styles/dimens';
 import colors from '../../styles/colors';
@@ -38,25 +38,33 @@ type PropTypes = {
 };
 
 const imageToFile = (image: Object) => ({
-  uri: image.path,
-  name: image.path,
-  type: image.mime,
+  uri: image.uri,
+  name: image.fileName,
+  type: image.type,
 });
 
 const openPicker = (onNext: (image: Object) => any) => {
-  ImagePicker.openPicker({
-    width: 300,
-    height: 200,
-    cropping: true,
-  }).then(image => onNext(imageToFile(image)));
+  ImagePicker.showImagePicker({
+    mediaType: 'photo',
+    maxWidth: 300,
+    maxHeight: 200,
+  }, image => {
+    if (!image.didCancel) {
+      onNext(imageToFile(image));
+    }
+  });
 };
 
 const openCamera = (onNext: (image: Object) => any) => {
-  ImagePicker.openCamera({
-    width: 300,
-    height: 200,
-    cropping: true,
-  }).then(image => onNext(imageToFile(image)));
+  ImagePicker.showImagePicker({
+    mediaType: 'photo',
+    maxWidth: 300,
+    maxHeight: 200,
+  }, image => {
+    if (!image.didCancel) {
+      onNext(imageToFile(image));
+    }
+  });
 };
 
 const ImageStep = ({ onSkip, onNext }: PropTypes) => (

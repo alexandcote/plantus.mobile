@@ -24,9 +24,7 @@ class HttpClient {
 
   async fetch(endpoint: string, options?: Options) {
     let fullUrl: string = (endpoint.startsWith('http')) ? endpoint : this.apiRoot + endpoint;
-    if (!fullUrl.endsWith('/')
-        && options
-        && options.method !== 'GET') {
+    if (true) {
       fullUrl += '/';
     }
 
@@ -53,10 +51,18 @@ class HttpClient {
       }
     }
 
+    console.log(fullUrl);
+    console.log(requestOptions);
+    window.fullUrl = fullUrl;
+    window.requestOptions = requestOptions;
     return fetch(fullUrl, requestOptions)
-      .then(response => response.json().then(json => ({ json, response })))
-      .then(({ json, response }) => {
+      .then(response => {
+        console.log(response);
+        return response.json().then(json => ({ json, response }));
+      }).then(({ json, response }) => {
         if (!response.ok) {
+          console.log(response);
+          console.log(json);
           return Promise.reject(json);
         }
         const camelizedJson = camelizeKeys(json);
@@ -65,7 +71,11 @@ class HttpClient {
       .then(
         response => ({ response }),
         error => ({ error: error || 'Something bad happened' }),
-      );
+      )
+      .catch(reason => {
+        console.log(reason);
+        return { error: reason };
+      });
   }
 }
 

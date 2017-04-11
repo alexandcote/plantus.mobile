@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { Actions as nav, ActionConst } from 'react-native-router-flux';
 import { plantActions } from '../../redux/actions';
 import ImageStep from '../../components/general/image-step';
 import { type Plant } from '../../types';
-import { Actions as nav, ActionConst } from 'react-native-router-flux';
 
 const { plantImageStep } = plantActions;
 
