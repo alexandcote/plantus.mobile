@@ -66,9 +66,7 @@ export function* plantImageStep(): any {
   while (true) {
     const { plantId, image } = yield take(plantActions.PLANT_IMAGE_STEP_REQUEST);
     const plant = objectToFormData({ picture: image });
-    const foo = yield call(api.patchPlant, plantId, plant);
-    console.log(foo);
-    const { response, error } = foo;
+    const { response, error } = yield call(api.patchPlant, plantId, plant);
     if (response) {
       yield put(plantActions.patchPlantSuccess(response));
       yield put(plantActions.plantImageStepSuccess(response));

@@ -26,7 +26,7 @@ const PlaceCard = ({ place, onPress, style }: PropTypes) => (
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}
-          source={{ uri: place.picture }} />
+          source={{ uri: place.picture ? place.picture : undefined }} />
       <Text />
     </View>
     <View style={styles.infoBar}>

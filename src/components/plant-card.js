@@ -26,7 +26,7 @@ const PlantCard = ({ plant, onPress, style }: PropTypes) => (
     <View style={{ flex: 4 }}>
       <Image
           style={{ flex: 1, resizeMode: 'cover' }}
-          source={{ uri: plant.picture }} />
+          source={{ uri: plant.picture ? plant.picture : undefined }} />
       <Text />
     </View>
     <View style={styles.infoBar}>
