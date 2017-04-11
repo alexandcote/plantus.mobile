@@ -81,32 +81,36 @@ class NewPlant extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 1 }}>
-          <TextInput style={styles.input} placeholder="Name" onChangeText={name => this.setState({ name })} />
-          <Picker
-              mode="dropdown"
-              onValueChange={place => this.setState({ place })}
-              selectedValue={this.state.place}>
-            { this.props.places.toArray().map(place => (
-              <Picker.Item key={place.id} label={place.name} value={place.id} />))
-            }
-          </Picker>
-          <Picker
-              mode="dropdown"
-              onValueChange={plantType => this.setState({ plantType })}
-              selectedValue={this.state.plantType}>
-            { this.props.plantTypes.toArray().map(plantType => (
-              <Picker.Item key={plantType.id} label={plantType.name} value={plantType.id} />))
-            }
-          </Picker>
-          <TextInput
-              style={styles.input}
-              placeholder="Identifier"
-              onChangeText={identifier => this.setState({ identifier })} />
-        </View>
-        <Button style={styles.button} title="Add Plant" onPress={this.addPlant} />
-      </View>
+      <Container>
+        <Content>
+          <View style={{ flex: 1 }}>
+            <TextInput style={styles.input} placeholder="Name" onChangeText={name => this.setState({ name })} />
+            <Picker
+                mode="dropdown"
+                iosHeader="Place"
+                onValueChange={place => this.setState({ place })}
+                selectedValue={this.state.place}>
+              { this.props.places.toArray().map(place => (
+                <Picker.Item key={place.id} label={place.name} value={place.id} />))
+              }
+            </Picker>
+            <Picker
+                mode="dropdown"
+                iosHeader="Plant"
+                onValueChange={plantType => this.setState({ plantType })}
+                selectedValue={this.state.plantType}>
+              { this.props.plantTypes.toArray().map(plantType => (
+                <Picker.Item key={plantType.id} label={plantType.name} value={plantType.id} />))
+              }
+            </Picker>
+            <TextInput
+                style={styles.input}
+                placeholder="Identifier"
+                onChangeText={identifier => this.setState({ identifier })} />
+          </View>
+          <Button style={styles.button} title="Add Plant" onPress={this.addPlant} />
+        </Content>
+      </Container>
     );
   }
 }

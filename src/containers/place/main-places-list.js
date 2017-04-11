@@ -1,6 +1,7 @@
 import { Actions as nav } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
+import { Container, Content } from 'native-base';
 import React, { Component } from 'react';
 import { type Place } from '../../types';
 import PlaceList from '../../components/place-list';
@@ -23,9 +24,13 @@ class MainPlaceList extends Component {
 
   render() {
     return (
-      <PlaceList
-          places={this.props.places}
-          onPlacePress={place => nav.placeDetail({ place, title: place.name })} />
+      <Container>
+        <Content>
+          <PlaceList
+              places={this.props.places}
+              onPlacePress={place => nav.placeDetail({ place, title: place.name })} />
+        </Content>
+      </Container>
     );
   }
 }
