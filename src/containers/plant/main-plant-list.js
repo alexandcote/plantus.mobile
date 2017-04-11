@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
-import {}
 
 import { Plant } from '../../types';
 import { plantActions } from '../../redux/actions';
@@ -27,13 +26,9 @@ class MainPlantList extends Component {
   }
 
   render = () => (
-      <Container>
-        <Content>
-          <PlantList
-              plants={this.props.plants}
-              onPlantClick={plant => nav.plantImageStep({ plant, title: plant.name })} />
-        </Content>
-      </Container>
+    <PlantList
+        plants={this.props.plants}
+        onPlantClick={plant => nav.plantDetail({ plant, title: plant.name })} />
   );
 }
 
