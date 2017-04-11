@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { ListView, StyleSheet } from 'react-native';
+import { ListView, StyleSheet, FlatList } from 'react-native';
 
 import CheckableWrapper from './checkable-wrapper';
 
@@ -19,28 +19,11 @@ type StateTypes = {
   dataSource: ListView.DataSource,
 };
 
-const rowHasChanged = (r1, r2) => r1 !== r2;
-
 export default class CheckableList extends Component {
   state: StateTypes;
   checkedItems: Set<any> = new Set();
   initialListSize: number;
-
-  constructor(props: PropTypes) {
-    super(props);
-    const ds = new ListView.DataSource({ rowHasChanged }).cloneWithRows(props.items);
-    this.initialListSize = props.items.length;
-    this.state = {
-      dataSource: ds,
-    };
-  }
-
-  componentWillReceiveProps(nextProps: PropTypes) {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(nextProps.items),
-    });
-  }
-
+  
   getCheckedItems = (): Set<any> => this.checkedItems;
 
   setItemState(item: any, checked: boolean) {
@@ -62,12 +45,10 @@ export default class CheckableList extends Component {
 
   render() {
     return (
-      <ListView
-          enableEmptySections
-          initialListSize={this.initialListSize}
-          contentContainerStyle={styles.list}
-          renderRow={this.renderRow}
-          dataSource={this.state.dataSource} />
+      <FlatList
+          style={styles.list}
+          renderItem={this.renderRow}
+          data={this.props.items} />
     );
   }
 }

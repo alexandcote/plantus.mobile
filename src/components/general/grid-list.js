@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { ListView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { List } from 'immutable';
 
 type PropTypes = {
@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-function rowHasChanged(r1, r2) { return r1 !== r2; }
 
 function splitItems(items: Array<any>, columns: number) {
   if (!items) {
@@ -34,10 +32,8 @@ export default class GridList extends Component {
   constructor(props: PropTypes) {
     super(props);
     const rows = splitItems(this.props.items, this.props.columns);
-    const ds = new ListView.DataSource({ rowHasChanged })
-        .cloneWithRows(rows);
     this.state = {
-      dataSource: ds,
+      rows,
     };
   }
 
@@ -45,7 +41,7 @@ export default class GridList extends Component {
     if (this.props.items !== nextProps.items) {
       const rows = splitItems(nextProps.items, this.props.columns);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(rows),
+        rows,
       });
     }
   }
@@ -53,6 +49,7 @@ export default class GridList extends Component {
   renderRow = (group: List<any>) => {
     const items = group.map(item => this.props.renderItem(item)).asMutable();
     const key = items.reduce((a, b) => a + b.key, '');
+    console.log(key);
     while (items.size < this.props.columns) {
       items.push(<View key={-1} style={[items.get(0).props.style, { opacity: 0 }]} />);
     }
@@ -65,12 +62,12 @@ export default class GridList extends Component {
 
   render() {
     return (
-      <ListView
-          enableEmptySections
+      <FlatList
           contentContainerStyle={styles.list}
           renderHeader={this.props.renderHeader}
-          renderRow={this.renderRow}
-          dataSource={this.state.dataSource} />
+          renderItem={obj => this.renderRow(obj.item)}
+          data={this.state.rows}
+          keyExtractor={row => row.reduce((a, b) => a + b.id, '')} />
     );
   }
 }

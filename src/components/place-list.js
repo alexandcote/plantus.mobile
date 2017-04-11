@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, ListView, StyleSheet, ViewStyle, Image } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import { Actions as nav } from 'react-native-router-flux';
 import { Map } from 'immutable';
 

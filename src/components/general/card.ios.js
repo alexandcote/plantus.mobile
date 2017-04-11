@@ -1,7 +1,8 @@
 // @flow
 
 import React from 'react';
-import { View, StyleSheet, ViewStyle, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import TouchableWrapper from './touchable-wrapper';
 
 const styles = StyleSheet.create({
   card: {
@@ -23,11 +24,11 @@ type PropTypes = {
 }
 
 const Card = ({ onPress, style, children }: PropTypes) => (
-  <TouchableHighlight style={[styles.card, style]} underlayColor="#ddd" onPress={onPress}>
+  <TouchableWrapper style={[styles.card, style]} onPress={onPress}>
     <View style={{ flex: 1 }} >
       {children}
     </View>
-  </TouchableHighlight>
+  </TouchableWrapper>
 );
 
 export default Card;

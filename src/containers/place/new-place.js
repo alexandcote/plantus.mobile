@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: dimens.defaultMargin,
+    height: dimens.inputHeight,
   },
 });
 
@@ -63,16 +64,16 @@ class NewPlace extends Component {
             style={styles.input}
             placeholder="Name"
             onChangeText={text => this.setState({ name: text })} />
+        <TextInput
+            style={styles.input}
+            placeholder="Identifier"
+            onChangeText={identifier => this.setState({ identifier })} />
 
         <Text style={{ marginLeft: 5 }}>Owners</Text>
         <CheckableList
             ref={list => { this.ownersCheckableList = list; }}
             items={this.props.users}
-            renderRow={user => <PersonItem key={user.id} user={user} />} />
-        <TextInput
-            style={styles.input}
-            placeholder="Identifier"
-            onChangeText={identifier => this.setState({ identifier })} />
+            renderRow={obj => <PersonItem key={obj.item.id} user={obj.item} />} />
         <Button title="Add Place" onPress={this.savePlace} />
       </View>
     );

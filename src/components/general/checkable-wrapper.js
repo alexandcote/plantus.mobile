@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import { View, StyleSheet, ViewStyle, TouchableNativeFeedback } from 'react-native';
+import { CheckBox } from 'native-base';
 import { MKCheckbox } from 'react-native-material-kit';
+import TouchableWrapper from './touchable-wrapper';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +35,7 @@ class CheckableWrapper extends Component {
 
   render() {
     return (
-      <TouchableNativeFeedback onPress={() => this.checkBox.confirmToggle()}>
+      <TouchableWrapper onPress={() => this.checkBox.confirmToggle()}>
         <View style={[styles.container, this.props.style]}>
           <View style={styles.left}>
             {this.props.children}
@@ -45,7 +47,7 @@ class CheckableWrapper extends Component {
                     this.props.onChange(value.checked)} />
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableWrapper>
     );
   }
 }
