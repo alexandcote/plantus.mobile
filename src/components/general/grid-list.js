@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { ListView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { List } from 'immutable';
 
 type PropTypes = {
@@ -9,6 +9,8 @@ type PropTypes = {
     columns: number,
     renderItem: (item: any) => any,
     renderHeader?: () => any,
+    onRefresh?: () => any,
+    refreshing?: boolean,
 };
 
 const styles = StyleSheet.create({
@@ -16,8 +18,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-function rowHasChanged(r1, r2) { return r1 !== r2; }
 
 function splitItems(items: Array<any>, columns: number) {
   if (!items) {
@@ -34,18 +34,20 @@ export default class GridList extends Component {
   constructor(props: PropTypes) {
     super(props);
     const rows = splitItems(this.props.items, this.props.columns);
-    const ds = new ListView.DataSource({ rowHasChanged })
-        .cloneWithRows(rows);
     this.state = {
-      dataSource: ds,
+      rows,
+      refreshing: false,
     };
   }
 
   componentWillReceiveProps(nextProps: PropTypes) {
+    this.setState({
+      refreshing: false,
+    });
     if (this.props.items !== nextProps.items) {
       const rows = splitItems(nextProps.items, this.props.columns);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(rows),
+        rows,
       });
     }
   }
@@ -63,14 +65,24 @@ export default class GridList extends Component {
     );
   }
 
+  refresh() {
+    console.log(this.props.onRefresh);
+    this.setState({
+      refreshing: true,
+    });
+    this.props.onRefresh();
+  }
+
   render() {
     return (
-      <ListView
-          enableEmptySections
+      <FlatList
+          refreshing={this.state.refreshing}
+          onRefresh={this.refresh}
           contentContainerStyle={styles.list}
-          renderHeader={this.props.renderHeader}
-          renderRow={this.renderRow}
-          dataSource={this.state.dataSource} />
+          ListHeaderComponent={this.props.renderHeader}
+          renderItem={obj => this.renderRow(obj.item)}
+          data={this.state.rows}
+          keyExtractor={row => row.reduce((a, b) => a + b.id, '')} />
     );
   }
 }

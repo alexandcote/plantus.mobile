@@ -63,6 +63,7 @@ class PlantDetail extends Component {
   props: PropTypes;
 
   componentDidMount() {
+    this.props.loadPlant(this.props.plant.id);
     this.props.checkIfWatering();
   }
 
