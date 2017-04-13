@@ -27,7 +27,9 @@ class MainPlantList extends Component {
 
   render = () => (
     <PlantList
+        refreshing
         plants={this.props.plants}
+        onRefresh={this.props.requestLoadPlants}
         onPlantClick={plant => nav.plantDetail({ plant, title: plant.name })} />
   );
 }

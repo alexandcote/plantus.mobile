@@ -24,7 +24,9 @@ class MainPlaceList extends Component {
   render() {
     return (
       <PlaceList
+          refreshing
           places={this.props.places}
+          onRefresh={this.props.requestLoadPlaces}
           onPlacePress={place => nav.placeDetail({ place, title: place.name })} />
     );
   }

@@ -36,6 +36,7 @@ type PropTypes = {
   plants: Map<number, Plant>,
   onPlantClick: (plant: Plant) => any,
   renderHeader?: any,
+  onRefresh?: () => any,
 }
 
 export default class PlantList extends Component {
@@ -70,6 +71,7 @@ export default class PlantList extends Component {
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <GridList
+              onRefresh={this.props.onRefresh}
               columns={2}
               items={this.state.plants.toArray()}
               renderItem={this.renderRow}

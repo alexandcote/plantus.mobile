@@ -30,6 +30,7 @@ type PropTypes = {
   style?: ViewStyle,
   places: Map<number, Place>,
   onPlacePress: (place: Place) => any,
+  onRefresh?: () => any,
 }
 
 class PlaceList extends Component {
@@ -65,6 +66,8 @@ class PlaceList extends Component {
       <View style={{ flex: 1, paddingBottom: 0 }}>
         <View style={[styles.container, this.props.style]}>
           <GridList
+              refreshing
+              onRefresh={this.props.onRefresh}
               columns={1}
               enableEmptySections
               contentContainerStyle={styles.list}
