@@ -76,8 +76,6 @@ export default class GridList extends Component {
   render() {
     return (
       <FlatList
-          refreshing={this.state.refreshing}
-          onRefresh={this.refresh}
           contentContainerStyle={styles.list}
           ListHeaderComponent={this.props.renderHeader}
           renderItem={obj => this.renderRow(obj.item)}
